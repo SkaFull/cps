@@ -1,0 +1,69 @@
+<!--pages/auth/login/login.wxml-->
+<view class="login-container">
+  <!-- 背景装饰 -->
+  <view class="bg-decoration">
+    <view class="circle circle-1"></view>
+    <view class="circle circle-2"></view>
+    <view class="circle circle-3"></view>
+  </view>
+
+  <view class="login-content">
+    <!-- Logo区域 -->
+    <view class="logo-section">
+      <view class="logo-wrapper">
+        <view class="logo-bg"></view>
+        <text class="logo-icon">🛍️</text>
+      </view>
+      <text class="app-name">实佣有你</text>
+      <text class="app-desc">优质商品 · 高额佣金 · 轻松赚钱</text>
+    </view>
+
+    <!-- 功能亮点 -->
+    <view class="features">
+      <view class="feature-item">
+        <view class="feature-icon">💰</view>
+        <text class="feature-text">高额返佣</text>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">🎁</view>
+        <text class="feature-text">精选好货</text>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">⚡</view>
+        <text class="feature-text">按时结算</text>
+      </view>
+    </view>
+
+    <!-- 登录按钮 -->
+    <view class="login-section">
+      <button 
+        class="login-btn" 
+        loading="{{loading}}"
+        disabled="{{loading}}"
+        bindtap="handleLogin">
+        <view class="btn-content">
+          <text class="wechat-icon" wx:if="{{!loading}}">📱</text>
+          <text class="btn-text" wx:if="{{!loading}}">微信一键登录</text>
+          <text class="btn-text" wx:else>登录中...</text>
+        </view>
+      </button>
+
+      <button 
+        class="cancel-btn" 
+        bindtap="handleCancel">
+        暂不登录，先逛逛
+      </button>
+    </view>
+
+    <!-- 服务协议 -->
+    <view class="agreement-section">
+      <view class="agreement-checkbox" bindtap="toggleAgreement">
+        <text class="checkbox-icon" wx:if="{{agreeChecked}}">✓</text>
+      </view>
+      <text class="agreement-text">登录即表示同意</text>
+      <text class="agreement-link" bindtap="openUserAgreement">《用户协议》</text>
+      <text class="agreement-text">和</text>
+      <text class="agreement-link" bindtap="openPrivacyPolicy">《隐私政策》</text>
+    </view>
+  </view>
+</view>

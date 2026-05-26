@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>21</version>
+        </provides>
+        <configuration>
+            <jdkHome>C:\Program Files\Java\jdk-21</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>

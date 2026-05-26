@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <!-- 背景渐变 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#409EFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66B1FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.85" />
+    </linearGradient>
+    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#67C23A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#85CE61;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="300" height="200" fill="url(#bgGradient)" rx="8"/>
+
+  <!-- 装饰圆点 -->
+  <circle cx="280" cy="20" r="3" fill="#ffffff" opacity="0.4"/>
+  <circle cx="260" cy="30" r="2" fill="#ffffff" opacity="0.3"/>
+  <circle cx="270" cy="180" r="4" fill="#ffffff" opacity="0.3"/>
+  <circle cx="25" cy="25" r="2.5" fill="#ffffff" opacity="0.4"/>
+
+  <!-- 主标题 -->
+  <text x="150" y="35" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold" font-family="Arial, sans-serif">
+    CPS Dashboard
+  </text>
+
+  <!-- 卡片1 - 折线图 -->
+  <g transform="translate(15, 50)">
+    <rect width="125" height="65" fill="url(#cardGradient)" rx="6" opacity="0.9"/>
+    <text x="8" y="15" fill="#606266" font-size="10" font-weight="600">订单趋势</text>
+    <!-- 迷你折线图 -->
+    <polyline points="10,50 25,38 40,42 55,30 70,35 85,25 100,28 115,20"
+              fill="none" stroke="url(#lineGradient)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="10" cy="50" r="2.5" fill="#67C23A"/>
+    <circle cx="115" cy="20" r="2.5" fill="#67C23A"/>
+    <!-- 底部网格线 -->
+    <line x1="10" y1="55" x2="115" y2="55" stroke="#E4E7ED" stroke-width="0.5"/>
+  </g>
+
+  <!-- 卡片2 - 饼图 -->
+  <g transform="translate(160, 50)">
+    <rect width="125" height="65" fill="url(#cardGradient)" rx="6" opacity="0.9"/>
+    <text x="8" y="15" fill="#606266" font-size="10" font-weight="600">平台占比</text>
+    <!-- 迷你饼图 -->
+    <g transform="translate(62, 40)">
+      <circle cx="0" cy="0" r="18" fill="#E4E7ED"/>
+      <path d="M 0,-18 A 18,18 0 0,1 15.6,-9" fill="#D84315"/>
+      <path d="M 15.6,-9 A 18,18 0 0,1 9,15.6" fill="#C62828"/>
+      <path d="M 9,15.6 A 18,18 0 0,1 -15.6,9" fill="#6A1B9A"/>
+      <path d="M -15.6,9 A 18,18 0 0,1 0,-18" fill="#1565C0"/>
+    </g>
+  </g>
+
+  <!-- 卡片3 - 数据统计 -->
+  <g transform="translate(15, 130)">
+    <rect width="125" height="55" fill="url(#cardGradient)" rx="6" opacity="0.9"/>
+    <text x="8" y="15" fill="#606266" font-size="10" font-weight="600">今日数据</text>
+    <g transform="translate(8, 25)">
+      <text x="0" y="10" fill="#409EFF" font-size="18" font-weight="bold">1,248</text>
+      <text x="0" y="24" fill="#909399" font-size="8">订单量 ↑12%</text>
+    </g>
+    <g transform="translate(70, 25)">
+      <text x="0" y="10" fill="#67C23A" font-size="18" font-weight="bold">¥8.9K</text>
+      <text x="0" y="24" fill="#909399" font-size="8">收益 ↑8%</text>
+    </g>
+  </g>
+
+  <!-- 卡片4 - 柱状图 -->
+  <g transform="translate(160, 130)">
+    <rect width="125" height="55" fill="url(#cardGradient)" rx="6" opacity="0.9"/>
+    <text x="8" y="15" fill="#606266" font-size="10" font-weight="600">平台活跃度</text>
+    <g transform="translate(15, 25)">
+      <rect x="0" y="10" width="15" height="15" fill="#D84315" rx="2"/>
+      <rect x="22" y="5" width="15" height="20" fill="#C62828" rx="2"/>
+      <rect x="44" y="12" width="15" height="13" fill="#6A1B9A" rx="2"/>
+      <rect x="66" y="8" width="15" height="17" fill="#1565C0" rx="2"/>
+      <rect x="88" y="15" width="15" height="10" fill="#00897B" rx="2"/>
+    </g>
+  </g>
+
+  <!-- 装饰线条 -->
+  <line x1="20" y1="120" x2="280" y2="120" stroke="#ffffff" stroke-width="0.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,389 @@
+<!--pages/goods/list/list.wxml - 收益分析页面-->
+<view class="income-container">
+
+  <!-- 顶部收益统计区域（蓝色背景） -->
+  <view class="income-header">
+    <!-- 标题 -->
+    <view class="header-title">
+      <!--text class="title-text">收益分析</text-->
+    </view>
+
+    <!-- 时间筛选栏 -->
+    <view class="time-filter-bar">
+      <view class="time-filter-left" bindtap="toggleTimeMenu">
+        <text class="time-filter-label">创建时间</text>
+        <text class="time-filter-arrow">∨</text>
+      </view>
+      <view class="time-filter-options">
+        <text class="time-opt {{timeRange === 'today' ? 'active' : ''}}" bindtap="selectTimeRange" data-range="today">今天</text>
+        <text class="time-opt {{timeRange === 'yesterday' ? 'active' : ''}}" bindtap="selectTimeRange" data-range="yesterday">昨天</text>
+        <text class="time-opt {{timeRange === 'last3days' ? 'active' : ''}}" bindtap="selectTimeRange" data-range="last3days">近3天</text>
+        <text class="time-opt {{timeRange === 'last7days' ? 'active' : ''}}" bindtap="selectTimeRange" data-range="last7days">近7天</text>
+        <text class="time-opt {{timeRange === 'last30days' ? 'active' : ''}}" bindtap="selectTimeRange" data-range="last30days">近30</text>
+        <view class="time-calendar-btn" bindtap="showDatePicker">
+          <text class="calendar-icon">📅</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 有效成交金额 -->
+    <view class="income-main">
+      <view class="income-amount-section">
+        <view class="income-amount-label">
+          <text class="label-text">有效成交金额</text>
+          <view class="data-explain-btn" bindtap="showDataExplain">
+            <text class="explain-text">数据说明</text>
+          </view>
+        </view>
+        <view class="income-amount-right">
+          <text class="hot-trend-text">今天热销趋势</text>
+        </view>
+      </view>
+      <view class="income-amount-value">
+        <text class="amount-prefix">¥</text>
+        <text class="amount-num">{{incomeData.validOrderAmount > 0 ? incomeData.validOrderAmount : '-'}}</text>
+      </view>
+
+      <!-- 有效订单和有效收益 -->
+      <view class="income-sub-stats">
+        <view class="sub-stat-item">
+          <text class="sub-stat-label">有效订单</text>
+          <text class="sub-stat-value">{{incomeData.validOrderCount > 0 ? incomeData.validOrderCount + '笔' : '-笔'}}</text>
+        </view>
+        <view class="sub-stat-item">
+          <text class="sub-stat-label">有效收益</text>
+          <text class="sub-stat-value">{{incomeData.validIncome > 0 ? '¥' + incomeData.validIncome : '-'}}</text>
+        </view>
+      </view>
+
+      <!-- 展开后显示的额外数据 -->
+      <view class="income-extra-stats" wx:if="{{incomeExpanded}}">
+        <!-- 第一行：总销售额、总订单数、预估收益 -->
+        <view class="extra-stats-row">
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">总销售额</text>
+            <text class="extra-stat-value">{{incomeData.totalSalesAmount > 0 ? '¥' + incomeData.totalSalesAmount : '-'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">总订单数</text>
+            <text class="extra-stat-value">{{incomeData.totalOrderCount > 0 ? incomeData.totalOrderCount + '笔' : '-笔'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">预估收益</text>
+            <text class="extra-stat-value">{{incomeData.estimatedTotalIncome > 0 ? '¥' + incomeData.estimatedTotalIncome : '-'}}</text>
+          </view>
+        </view>
+
+        <!-- 第二行：退款销售额、退款订单、退款率 -->
+        <view class="extra-stats-row">
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">退款销售额</text>
+            <text class="extra-stat-value">{{incomeData.refundSalesAmount > 0 ? '¥' + incomeData.refundSalesAmount : '-'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">退款订单</text>
+            <text class="extra-stat-value">{{incomeData.refundOrderCount > 0 ? incomeData.refundOrderCount + '笔' : '-笔'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">退款率</text>
+            <text class="extra-stat-value">{{incomeData.refundRate > 0 ? incomeData.refundRate + '%' : '-'}}</text>
+          </view>
+        </view>
+
+        <!-- 第三行：违规成交金额、违规订单、违规收益 -->
+        <view class="extra-stats-row">
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">违规成交金额</text>
+            <text class="extra-stat-value">{{incomeData.violationSalesAmount > 0 ? '¥' + incomeData.violationSalesAmount : '-'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">违规订单</text>
+            <text class="extra-stat-value">{{incomeData.violationOrderCount > 0 ? incomeData.violationOrderCount + '笔' : '-笔'}}</text>
+          </view>
+          <view class="extra-stat-item">
+            <text class="extra-stat-label">违规收益</text>
+            <text class="extra-stat-value">{{incomeData.violationIncome > 0 ? '¥' + incomeData.violationIncome : '-'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 折叠箭头 -->
+    <view class="collapse-arrow" bindtap="toggleIncomeExpand">
+      <text class="collapse-icon {{incomeExpanded ? 'expanded' : ''}}">∨</text>
+    </view>
+  </view>
+
+  <!-- Tab切换栏 -->
+  <view class="tab-bar">
+    <view class="tab-left">
+      <view class="tab-item active">
+        <text class="tab-text">订单明细</text>
+        <view class="tab-underline"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="toggleAllianceMenu">
+      <text class="filter-text">联盟平台</text>
+      <text class="filter-arrow {{showAllianceMenu ? 'up' : 'down'}}">{{showAllianceMenu ? '∧' : '∨'}}</text>
+    </view>
+    <view class="filter-item" bindtap="toggleStatusMenu">
+      <text class="filter-text">状态</text>
+      <text class="filter-arrow {{showStatusMenu ? 'up' : 'down'}}">{{showStatusMenu ? '∧' : '∨'}}</text>
+    </view>
+  </view>
+
+  <!-- 联盟类型展开面板 -->
+  <view class="filter-panel" wx:if="{{showAllianceMenu}}">
+    <view class="filter-options">
+      <view 
+        wx:for="{{allianceOptions}}" 
+        wx:key="platformType" 
+        class="filter-option-item {{allianceFilter === item.platformType ? 'active' : ''}}" 
+        bindtap="selectAlliance" 
+        data-filter="{{item.platformType}}"
+      >
+        <text class="option-text">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 状态展开面板 -->
+  <view class="filter-panel" wx:if="{{showStatusMenu}}">
+    <view class="filter-options">
+      <view class="filter-option-item {{statusFilter === 'all' ? 'active' : ''}}" bindtap="selectStatus" data-filter="all">
+        <text class="option-text">全部状态</text>
+      </view>
+      <view class="filter-option-item {{statusFilter === 'paid' ? 'active' : ''}}" bindtap="selectStatus" data-filter="paid">
+        <text class="option-text">已付款</text>
+      </view>
+      <view class="filter-option-item {{statusFilter === 'confirmed' ? 'active' : ''}}" bindtap="selectStatus" data-filter="confirmed">
+        <text class="option-text">确认收货</text>
+      </view>
+      <view class="filter-option-item {{statusFilter === 'invalid' ? 'active' : ''}}" bindtap="selectStatus" data-filter="invalid">
+        <text class="option-text">已失效</text>
+      </view>
+      <view class="filter-option-item {{statusFilter === 'rights' ? 'active' : ''}}" bindtap="selectStatus" data-filter="rights">
+        <view class="option-text-wrapper">
+          <text class="option-text">维权订单</text>
+          <text class="option-subtitle">买家发起退款</text>
+        </view>
+      </view>
+      <view class="filter-option-item {{statusFilter === 'violation' ? 'active' : ''}}" bindtap="selectStatus" data-filter="violation">
+        <view class="option-text-wrapper">
+          <text class="option-text">违规订单</text>
+          <text class="option-subtitle violation">收益被联盟扣回</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日期选择器弹窗 -->
+  <view class="modal-mask" wx:if="{{showDatePicker}}" bindtap="closeDatePicker"></view>
+  <view class="date-picker-modal" wx:if="{{showDatePicker}}" catchtap="stopPropagation">
+    <view class="date-picker-header">
+      <text class="date-picker-title">日期选择</text>
+      <view class="date-picker-close" bindtap="closeDatePicker">✕</view>
+    </view>
+    
+    <view class="calendar-container">
+      <!-- 月份切换 -->
+      <view class="calendar-header">
+        <view class="month-switch" bindtap="changeMonth" data-direction="prev">‹</view>
+        <text class="current-month">{{calendarYear}}年{{calendarMonth}}月</text>
+        <view class="month-switch" bindtap="changeMonth" data-direction="next">›</view>
+      </view>
+      
+      <!-- 星期标题 -->
+      <view class="calendar-weekdays">
+        <text class="weekday">一</text>
+        <text class="weekday">二</text>
+        <text class="weekday">三</text>
+        <text class="weekday">四</text>
+        <text class="weekday">五</text>
+        <text class="weekday">六</text>
+        <text class="weekday">日</text>
+      </view>
+      
+      <!-- 日期网格 -->
+      <view class="calendar-days">
+        <view 
+          wx:for="{{calendarDays}}" 
+          wx:key="index"
+          class="calendar-day {{item.disabled ? 'disabled' : ''}} {{item.isOtherMonth ? 'other-month' : ''}} {{selectedStartDate === item.dateString ? 'selected-start' : ''}} {{selectedEndDate === item.dateString ? 'selected-end' : ''}} {{selectedStartDate && selectedEndDate && item.dateString > selectedStartDate && item.dateString < selectedEndDate ? 'in-range' : ''}}"
+          bindtap="selectDate"
+          data-index="{{index}}"
+        >
+          <text class="day-number">{{item.day}}</text>
+        </view>
+      </view>
+      
+      <!-- 选择提示 -->
+      <view class="date-selection-hint">
+        <text wx:if="{{!selectedStartDate}}" class="hint-text">请选择开始日期</text>
+        <text wx:elif="{{selectedStartDate && !selectedEndDate}}" class="hint-text">已选：{{selectedStartDate}}，请选择结束日期</text>
+        <text wx:else class="hint-text">{{selectedStartDate}} 至 {{selectedEndDate}}</text>
+      </view>
+    </view>
+    
+    <view class="date-picker-footer">
+      <view class="date-picker-btn confirm" bindtap="confirmDateSelection">确定</view>
+    </view>
+  </view>
+
+  <!-- 数据说明弹窗 -->
+  <view class="modal-mask" wx:if="{{showDataExplainModal}}" bindtap="closeDataExplain"></view>
+  <view class="data-explain-modal" wx:if="{{showDataExplainModal}}">
+    <view class="modal-header">
+      <text class="modal-title">数据说明</text>
+      <view class="modal-close" bindtap="closeDataExplain">✕</view>
+    </view>
+    <scroll-view class="modal-content" scroll-y>
+      <view class="explain-section">
+        <view class="section-title">数据来源：</view>
+        <view class="section-text">授权大淘客之前近90天订单和授权之后新增订单</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">时间说明：</view>
+        <view class="section-item">
+          <text class="item-label">创建时间：</text>
+          <text class="item-text">订单生成时间，可能存在部分订单未完成付款</text>
+        </view>
+        <view class="section-item">
+          <text class="item-label">付款时间：</text>
+          <text class="item-text">订单付款时间，付款后可能会产生退款行为</text>
+        </view>
+        <view class="section-item">
+          <text class="item-label">收货时间：</text>
+          <text class="item-text">订单确认收货时间，订单完成，变为可结算收益，新手计划用户需要在平台结算后方可提现</text>
+        </view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">有效销售额：</view>
+        <view class="section-text">除退款订单、违规订单外，所有付款订单的金额综合</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">有效订单数：</view>
+        <view class="section-text">除退款订单、违规订单外，所有状态的订单总数</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">有效收益：</view>
+        <view class="section-text">除退款订单、违规订单外，所有订单的预估收益总和(当时间为确认时间时，有效收益为可提现收益，新手计划用户提现需要扣除部分佣金费用)</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">总销售额：</view>
+        <view class="section-text">所有订单付款金额的总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">总订单数：</view>
+        <view class="section-text">所有付款订单的总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">退款销售额：</view>
+        <view class="section-text">所有退款订单的付款金额总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">退款订单：</view>
+        <view class="section-text">所有退款订单的总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">退款率：</view>
+        <view class="section-text">所有退款订单数/所有付款订单数</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">违规成交金额：</view>
+        <view class="section-text">所有违规订单付款金额的总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">违规订单：</view>
+        <view class="section-text">所有违规订单的总和</view>
+      </view>
+      
+      <view class="explain-section">
+        <view class="section-title">违规收益：</view>
+        <view class="section-text">所有违规订单的收益总和</view>
+      </view>
+    </scroll-view>
+    <view class="modal-footer">
+      <view class="modal-btn" bindtap="closeDataExplain">我知道了</view>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area">
+    <!-- 订单列表 -->
+      <view class="order-list" wx:if="{{orderList.length > 0}}">
+        <view class="order-item" wx:for="{{orderList}}" wx:key="orderId">
+          <view class="order-item-header">
+            <text class="order-goods-title">{{item.goodsTitle || '商品名称'}}</text>
+            <text class="order-status {{item.status === 'settled' ? 'status-settled' : 'status-unsettled'}}">
+              {{item.status === 'settled' ? '已结算' : '未结算'}}
+            </text>
+          </view>
+          <view class="order-item-info">
+            <view class="order-info-left">
+              <image class="order-goods-img" src="{{item.goodsImg || ''}}" mode="aspectFill"></image>
+            </view>
+            <view class="order-info-right">
+              <view class="order-meta">
+                <text class="order-meta-label">订单号：</text>
+                <text class="order-meta-value">{{item.orderId}}</text>
+              </view>
+              <view class="order-meta">
+                <text class="order-meta-label">成交时间：</text>
+                <text class="order-meta-value">{{item.orderTime}}</text>
+              </view>
+              <view class="order-meta">
+                <text class="order-meta-label">成交金额：</text>
+                <text class="order-meta-value order-amount">¥{{item.orderAmount}}</text>
+              </view>
+              <view class="order-meta">
+                <text class="order-meta-label">预计收益：</text>
+                <text class="order-meta-value order-income">¥{{item.income}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 加载中 -->
+      <view class="loading-wrapper" wx:if="{{loading}}">
+        <text class="loading-text">加载中...</text>
+      </view>
+
+      <!-- 没有更多 -->
+      <view class="no-more" wx:if="{{!hasMore && orderList.length > 0}}">
+        <text class="no-more-text">没有更多了</text>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{!loading && orderList.length === 0}}">
+        <image class="empty-image" src="/images/empty.png" mode="aspectFit" wx:if="{{false}}"></image>
+        <view class="empty-illustration">
+          <view class="empty-doc">
+            <view class="empty-doc-line"></view>
+            <view class="empty-doc-line short"></view>
+            <view class="empty-doc-line"></view>
+          </view>
+          <view class="empty-figure"></view>
+          <view class="empty-tree left-tree"></view>
+          <view class="empty-tree right-tree"></view>
+        </view>
+        <text class="empty-text">还没有订单数据哦~</text>
+      </view>
+  </view>
+</view>

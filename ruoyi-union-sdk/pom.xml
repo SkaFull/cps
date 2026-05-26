@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.ruoyi</groupId>
+        <artifactId>ruoyi</artifactId>
+        <version>3.9.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ruoyi-union-sdk</artifactId>
+    <description>联盟SDK集成</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <!-- 淘宝客SDK，请根据自己的进行申请 -->
+        <dependency>
+            <groupId>com.taobao.sdk</groupId>
+            <artifactId>taobao-sdk-java</artifactId>
+            <version>1698396062491-20241216</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1698396062491-20241216.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.taobao.sdk</groupId>
+            <artifactId>taobao-sdk-java-source</artifactId>
+            <version>1698396062491-20241216</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/taobao-sdk-java-auto_1698396062491-20241216-source.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+        
+        <!-- 为旧版淘宝SDK提供javax.servlet API支持（JDK 17兼容性） -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- 京东SDK -->
+        <dependency>
+            <groupId>com.jd.open.api</groupId>
+            <artifactId>open-api-sdk</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jd-api-sdk-java-20260331.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+        <!-- 拼多多SDK -->
+        <dependency>
+            <groupId>com.pdd.sdk</groupId>
+            <artifactId>pop-sdk</artifactId>
+            <version>1.19.4-all</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/pop-sdk-1.19.4-all.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.pdd.sdk</groupId>
+            <artifactId>pop-sdk-sources</artifactId>
+            <version>1.19.4-all</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/pop-sdk-1.19.4-all-sources.jar</systemPath>
+        </dependency>
+        <!-- 移除了不兼容Spring Boot 3+的旧版Swagger/Springfox依赖 -->
+        <!-- 项目已使用SpringDoc (springdoc-openapi-starter-webmvc-ui)，无需这些旧依赖 -->
+        <!-- 如需Swagger注解，使用 io.swagger.core.v3:swagger-annotations-jakarta -->
+        
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.6.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>

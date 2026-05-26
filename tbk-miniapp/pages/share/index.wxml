@@ -1,0 +1,115 @@
+<!--pages/share/index.wxml - 分享推广-->
+<view class="container">
+  <!-- 未登录提示 -->
+  <view class="login-tip-card" wx:if="{{!isLoggedIn}}">
+    <view class="tip-icon">🔐</view>
+    <view class="tip-title">请先登录</view>
+    <view class="tip-desc">登录后才能查看分享推广信息</view>
+    <button class="login-btn" bindtap="goToLogin">去登录</button>
+  </view>
+
+  <!-- 非代理提示 -->
+  <view class="not-agent-card" wx:if="{{isLoggedIn && !isAgent}}">
+    <view class="tip-icon">💼</view>
+    <view class="tip-title">您还不是代理</view>
+    <view class="tip-desc">申请成为代理后即可开始推广赚取佣金</view>
+    <button class="apply-btn" bindtap="goToApply">申请成为代理</button>
+  </view>
+
+  <!-- 代理推广信息 -->
+  <view class="agent-content" wx:if="{{isLoggedIn && isAgent}}">
+    <!-- 成功提示卡片 -->
+    <view class="success-card">
+      <view class="success-icon">✅</view>
+      <view class="success-info">
+        <text class="success-title">恭喜！您已成为代理</text>
+        <text class="success-desc">快去分享商品赚取佣金吧</text>
+      </view>
+    </view>
+
+    <!-- 邀请码卡片 -->
+    <view class="invitation-card">
+      <view class="card-header">
+        <view class="header-icon">🎁</view>
+        <text class="header-title">我的邀请码</text>
+      </view>
+      <view class="invitation-code-wrapper">
+        <text class="invitation-code">{{agentInfo.invitationCode || '-'}}</text>
+        <button class="copy-btn" bindtap="onCopyInvitationCode">
+          <text class="copy-icon">📋</text>
+          <text>复制</text>
+        </button>
+      </view>
+      <view class="card-tips">
+        <text class="tips-icon">💡</text>
+        <text>分享商品时会自动携带您的邀请码</text>
+      </view>
+    </view>
+
+    <!-- 代理信息卡片 -->
+    <view class="info-card">
+      <view class="card-title">代理信息</view>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">真实姓名</text>
+          <text class="info-value">{{agentInfo.realName || '-'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">手机号</text>
+          <text class="info-value">{{agentInfo.phone || '-'}}</text>
+        </view>
+        <view class="info-item info-item-platforms">
+          <text class="info-label">联盟类型</text>
+          <view class="platforms-list">
+            <text wx:if="{{!agentInfo.platforms || agentInfo.platforms.length === 0}}" class="info-value">-</text>
+            <text wx:for="{{agentInfo.platforms}}" wx:key="index" class="platform-tag">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推广说明卡片 -->
+    <view class="guide-card">
+      <view class="guide-title">
+        <text class="guide-icon">📖</text>
+        <text>推广指南</text>
+      </view>
+      <view class="guide-list">
+        <view class="guide-item">
+          <view class="guide-number">1</view>
+          <text class="guide-text">在首页选择心仪的商品</text>
+        </view>
+        <view class="guide-item">
+          <view class="guide-number">2</view>
+          <text class="guide-text">点击分享按钮生成专属推广链接</text>
+        </view>
+        <view class="guide-item">
+          <view class="guide-number">3</view>
+          <text class="guide-text">分享给好友，好友下单即可获得佣金</text>
+        </view>
+        <view class="guide-item">
+          <view class="guide-number">4</view>
+          <text class="guide-text">在收益页面查看订单和佣金明细</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分享按钮 -->
+    <button class="share-btn" open-type="share">
+      <text class="share-icon">📱</text>
+      <text>分享给好友</text>
+    </button>
+
+    <!-- 快捷入口 -->
+    <view class="quick-links">
+      <view class="link-item" bindtap="goToIncome">
+        <view class="link-icon">💰</view>
+        <text class="link-text">查看收益</text>
+      </view>
+      <view class="link-item" bindtap="goToHome">
+        <view class="link-icon">🏠</view>
+        <text class="link-text">去推广</text>
+      </view>
+    </view>
+  </view>
+</view>

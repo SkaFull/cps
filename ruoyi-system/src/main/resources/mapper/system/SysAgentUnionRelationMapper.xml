@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysAgentUnionRelationMapper">
+
+    <resultMap type="SysAgentUnionRelation" id="SysAgentUnionRelationResult">
+        <result property="id"               column="id"                 />
+        <result property="userId"           column="user_id"            />
+        <result property="applyId"          column="apply_id"           />
+        <result property="unionPlatformId"  column="union_platform_id"  />
+        <result property="platformType"     column="platform_type"      />
+        <result property="status"           column="status"             />
+        <result property="authStatus"       column="auth_status"        />
+        <result property="authUrl"          column="auth_url"           />
+        <result property="customParameters" column="custom_parameters"  />
+        <result property="createBy"         column="create_by"          />
+        <result property="createTime"       column="create_time"        />
+        <result property="updateBy"         column="update_by"          />
+        <result property="updateTime"       column="update_time"        />
+        <result property="remark"           column="remark"             />
+        <association property="unionPlatform" column="union_platform_id" javaType="SysUnionPlatform" resultMap="unionPlatformResult" />
+    </resultMap>
+
+    <resultMap type="SysUnionPlatform" id="unionPlatformResult">
+        <result property="id"           column="up_id"            />
+        <result property="platformType" column="up_platform_type" />
+        <result property="platformName" column="up_platform_name" />
+        <result property="appKey"       column="up_app_key"       />
+        <result property="appSecret"    column="up_app_secret"    />
+        <result property="siteId"       column="up_site_id"       />
+        <result property="adzoneId"     column="up_adzone_id"     />
+        <result property="accessToken"  column="up_access_token"  />
+        <result property="isQuote"      column="up_is_quote"      />
+        <result property="remark"       column="up_remark"        />
+        <result property="createBy"     column="up_create_by"     />
+        <result property="createTime"   column="up_create_time"   />
+        <result property="updateBy"     column="up_update_by"     />
+        <result property="updateTime"   column="up_update_time"   />
+    </resultMap>
+
+    <sql id="selectSysAgentUnionRelationVo">
+        select r.id, r.user_id, r.apply_id, r.union_platform_id, r.platform_type, r.status,
+               r.auth_status, r.auth_url, r.custom_parameters,
+               r.create_by, r.create_time, r.update_by, r.update_time, r.remark,
+               u.id as up_id, u.platform_type as up_platform_type, u.platform_name as up_platform_name,
+               u.app_key as up_app_key, u.app_secret as up_app_secret, u.site_id as up_site_id,
+               u.adzone_id as up_adzone_id, u.access_token as up_access_token, u.is_quote as up_is_quote,
+               u.remark as up_remark, u.create_by as up_create_by, u.create_time as up_create_time,
+               u.update_by as up_update_by, u.update_time as up_update_time
+        from sys_agent_union_relation r
+        left join sys_union_platform u on r.union_platform_id = u.id
+    </sql>
+
+    <select id="selectSysAgentUnionRelationById" parameterType="Long" resultMap="SysAgentUnionRelationResult">
+        <include refid="selectSysAgentUnionRelationVo"/>
+        where r.id = #{id}
+    </select>
+
+    <select id="selectByUserIdAndPlatformType" resultMap="SysAgentUnionRelationResult">
+        <include refid="selectSysAgentUnionRelationVo"/>
+        where r.user_id = #{userId} and r.platform_type = #{platformType}
+    </select>
+
+    <select id="selectByUserId" parameterType="Long" resultMap="SysAgentUnionRelationResult">
+        <include refid="selectSysAgentUnionRelationVo"/>
+        where r.user_id = #{userId}
+        order by r.id desc
+    </select>
+
+    <select id="selectByApplyId" parameterType="Long" resultMap="SysAgentUnionRelationResult">
+        <include refid="selectSysAgentUnionRelationVo"/>
+        where r.apply_id = #{applyId}
+        order by r.id desc
+    </select>
+
+    <select id="selectSysAgentUnionRelationList" parameterType="SysAgentUnionRelation" resultMap="SysAgentUnionRelationResult">
+        <include refid="selectSysAgentUnionRelationVo"/>
+        <where>
+            <if test="userId != null">
+                and r.user_id = #{userId}
+            </if>
+            <if test="applyId != null">
+                and r.apply_id = #{applyId}
+            </if>
+            <if test="unionPlatformId != null">
+                and r.union_platform_id = #{unionPlatformId}
+            </if>
+            <if test="platformType != null and platformType != ''">
+                and r.platform_type = #{platformType}
+            </if>
+            <if test="status != null and status != ''">
+                and r.status = #{status}
+            </if>
+        </where>
+        order by r.id desc
+    </select>
+
+    <insert id="insertSysAgentUnionRelation" parameterType="SysAgentUnionRelation" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_agent_union_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="applyId != null">apply_id,</if>
+            <if test="unionPlatformId != null">union_platform_id,</if>
+            <if test="platformType != null and platformType != ''">platform_type,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="authStatus != null and authStatus != ''">auth_status,</if>
+            <if test="authUrl != null and authUrl != ''">auth_url,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="remark != null">remark,</if>
+            create_time,
+            update_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="applyId != null">#{applyId},</if>
+            <if test="unionPlatformId != null">#{unionPlatformId},</if>
+            <if test="platformType != null and platformType != ''">#{platformType},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="authStatus != null and authStatus != ''">#{authStatus},</if>
+            <if test="authUrl != null and authUrl != ''">#{authUrl},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="remark != null">#{remark},</if>
+            now(),
+            now()
+        </trim>
+    </insert>
+
+    <update id="updateSysAgentUnionRelation" parameterType="SysAgentUnionRelation">
+        update sys_agent_union_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="applyId != null">apply_id = #{applyId},</if>
+            <if test="unionPlatformId != null">union_platform_id = #{unionPlatformId},</if>
+            <if test="platformType != null and platformType != ''">platform_type = #{platformType},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="authStatus != null and authStatus != ''">auth_status = #{authStatus},</if>
+            <if test="authUrl != null and authUrl != ''">auth_url = #{authUrl},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = now()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysAgentUnionRelationById" parameterType="Long">
+        delete from sys_agent_union_relation where id = #{id}
+    </delete>
+
+    <delete id="deleteSysAgentUnionRelationByIds" parameterType="Long">
+        delete from sys_agent_union_relation where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSysAgentUnionRelationByApplyId" parameterType="Long">
+        delete from sys_agent_union_relation where apply_id = #{applyId}
+    </delete>
+
+</mapper>

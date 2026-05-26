@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- 圆形背景 -->
+  <circle cx="100" cy="100" r="100" fill="#4A90E2"/>
+  
+  <!-- 用户图标 -->
+  <g transform="translate(100, 100)">
+    <!-- 头部 -->
+    <circle cx="0" cy="-15" r="28" fill="#ffffff"/>
+    
+    <!-- 身体 -->
+    <path d="M -40 45 Q -40 10, -28 10 L 28 10 Q 40 10, 40 45 L 40 80 L -40 80 Z" fill="#ffffff"/>
+  </g>
+</svg>

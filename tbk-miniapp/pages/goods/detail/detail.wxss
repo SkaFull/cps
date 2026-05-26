@@ -1,0 +1,1158 @@
+/* pages/goods/detail/detail.wxss */
+page {
+  background: #f7f8fa;
+}
+
+.detail-container {
+  min-height: 100vh;
+  background: #f7f8fa;
+  padding-bottom: 20rpx;
+}
+
+/* ==================== 商品轮播图 ==================== */
+.goods-swiper {
+  width: 100%;
+  height: 750rpx;
+  background: #ffffff;
+  position: relative;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* 轮播图指示器美化 */
+.goods-swiper swiper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================== 商品信息区域 ==================== */
+.goods-info-section {
+  background: #ffffff;
+  padding: 32rpx 30rpx;
+  margin-bottom: 16rpx;
+  border-radius: 0 0 24rpx 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+  position: relative;
+  margin-top: -20rpx;
+  z-index: 10;
+}
+
+/* 价格区域 */
+.price-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28rpx;
+  padding: 24rpx;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+  border-radius: 16rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20rpx;
+  width: 200rpx;
+  height: 200rpx;
+  background: radial-gradient(circle, rgba(255, 68, 68, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.price-main {
+  display: flex;
+  align-items: baseline;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.price-symbol {
+  font-size: 32rpx;
+  color: #ff4444;
+  font-weight: bold;
+  margin-right: 4rpx;
+  margin-top: 8rpx;
+}
+
+.price-value {
+  font-size: 64rpx;
+  color: #ff4444;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2rpx;
+}
+
+.price-original {
+  display: flex;
+  align-items: center;
+  margin-left: 16rpx;
+  padding: 6rpx 14rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12rpx;
+  backdrop-filter: blur(10rpx);
+}
+
+.original-value {
+  font-size: 26rpx;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.sales-info {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 24rpx;
+  background: linear-gradient(135deg, #fff7e6 0%, #ffd591 100%);
+  border-radius: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(250, 140, 22, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.sales-label {
+  font-size: 22rpx;
+  color: #d46b08;
+  margin-right: 6rpx;
+  font-weight: 600;
+}
+
+.sales-value {
+  font-size: 28rpx;
+  color: #d46b08;
+  font-weight: bold;
+}
+
+/* 优惠券信息区域 */
+.coupon-section {
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #fff7e6 0%, #ffe7ba 100%);
+  border-radius: 16rpx;
+  border-left: 5rpx solid #faad14;
+  box-shadow: 0 2rpx 12rpx rgba(250, 173, 20, 0.15);
+}
+
+.coupon-item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.coupon-item:not(:last-child) {
+  border-bottom: 1rpx dashed rgba(250, 173, 20, 0.3);
+  margin-bottom: 12rpx;
+  padding-bottom: 12rpx;
+}
+
+.coupon-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+}
+
+.coupon-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #ad6800;
+  line-height: 40rpx;
+  font-weight: 500;
+}
+
+/* 促销标签区域 */
+.promotion-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16rpx;
+  border-left: 5rpx solid #0ea5e9;
+  box-shadow: 0 2rpx 12rpx rgba(14, 165, 233, 0.15);
+}
+
+.tag-item {
+  padding: 8rpx 20rpx;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  border-radius: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(14, 165, 233, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tag-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.5rpx;
+}
+
+/* 预估佣金区域 */
+.commission-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(135deg, #fef3f2 0%, #fee2e2 100%);
+  border-radius: 16rpx;
+  border: 2rpx solid #fca5a5;
+  box-shadow: 0 2rpx 12rpx rgba(252, 165, 165, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.commission-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20rpx;
+  width: 150rpx;
+  height: 150rpx;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.commission-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 1;
+}
+
+.commission-label {
+  font-size: 28rpx;
+  color: #991b1b;
+  font-weight: 600;
+  margin-right: 8rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.commission-value {
+  font-size: 36rpx;
+  color: #dc2626;
+  font-weight: bold;
+  letter-spacing: 0.5rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* 天猫活动信息区域 */
+.tmall-activity {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 24rpx;
+  background: linear-gradient(135deg, #fef5ed 0%, #fed7aa 100%);
+  border-radius: 16rpx;
+  border-left: 5rpx solid #f97316;
+  box-shadow: 0 2rpx 12rpx rgba(249, 115, 22, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.tmall-activity::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20rpx;
+  width: 150rpx;
+  height: 150rpx;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.activity-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 1;
+}
+
+.activity-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #9a3412;
+  line-height: 40rpx;
+  font-weight: 600;
+  letter-spacing: 0.5rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* 商品标题 */
+.goods-title {
+  font-size: 34rpx;
+  color: #1a1a1a;
+  line-height: 52rpx;
+  margin-bottom: 20rpx;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.5rpx;
+}
+
+/* 短标题 */
+.goods-short-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 16rpx 20rpx;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe7ba 100%);
+  border-radius: 16rpx;
+  border-left: 5rpx solid #faad14;
+  box-shadow: 0 2rpx 12rpx rgba(250, 173, 20, 0.15);
+}
+
+.short-title-tag {
+  padding: 6rpx 16rpx;
+  background: linear-gradient(135deg, #faad14 0%, #fa8c16 100%);
+  color: #ffffff;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  font-weight: bold;
+  box-shadow: 0 2rpx 8rpx rgba(250, 140, 22, 0.3);
+}
+
+.short-title-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #ad6800;
+  line-height: 40rpx;
+  font-weight: 500;
+}
+
+/* 类目信息 */
+.goods-category {
+  display: inline-flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  background: #f5f7fa;
+  border-radius: 30rpx;
+  border: 1rpx solid #e4e7ed;
+}
+
+.category-icon {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.category-name {
+  font-size: 26rpx;
+  color: #606266;
+  font-weight: 500;
+}
+
+/* ==================== 店铺信息 ==================== */
+.shop-section {
+  background: #ffffff;
+  padding: 28rpx 30rpx;
+  margin: 0 20rpx 16rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shop-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.shop-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+}
+
+.shop-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.shop-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shop-location {
+  font-size: 24rpx;
+  color: #8c8c8c;
+  display: flex;
+  align-items: center;
+}
+
+.shop-location::before {
+  content: '📍';
+  margin-right: 6rpx;
+}
+
+.shop-action {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #f0f2f5 0%, #e8eaed 100%);
+  border-radius: 30rpx;
+  transition: all 0.3s ease;
+}
+
+.action-text {
+  font-size: 26rpx;
+  color: #595959;
+  margin-right: 6rpx;
+  font-weight: 500;
+}
+
+.action-arrow {
+  font-size: 32rpx;
+  color: #8c8c8c;
+  line-height: 1;
+}
+
+/* ==================== 商品详情 ==================== */
+.detail-section {
+  background: #ffffff;
+  padding: 36rpx 30rpx;
+  margin: 0 20rpx 16rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36rpx;
+  position: relative;
+  padding-bottom: 20rpx;
+}
+
+.title-text {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  position: relative;
+  z-index: 2;
+  padding-right: 24rpx;
+  background: #ffffff;
+  letter-spacing: 1rpx;
+}
+
+.title-text::after {
+  content: '';
+  position: absolute;
+  bottom: -20rpx;
+  left: 0;
+  width: 60rpx;
+  height: 6rpx;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3rpx;
+}
+
+.title-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2rpx;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.3) 0%, transparent 100%);
+  z-index: 1;
+}
+
+/* 商品视频 */
+.detail-videos {
+  margin-bottom: 36rpx;
+}
+
+.video-item {
+  margin-bottom: 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.video-item:last-child {
+  margin-bottom: 0;
+}
+
+.goods-video {
+  width: 100%;
+  height: 420rpx;
+  border-radius: 16rpx;
+  background: #000000;
+}
+
+/* 商品属性信息 */
+.detail-props {
+  margin-bottom: 36rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 1rpx solid #e8eaed;
+}
+
+.prop-group {
+  margin-bottom: 24rpx;
+}
+
+.prop-group:last-child {
+  margin-bottom: 0;
+}
+
+.prop-group-name {
+  font-size: 30rpx;
+  color: #1a1a1a;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 2rpx solid #667eea;
+  display: inline-block;
+  letter-spacing: 0.5rpx;
+}
+
+.prop-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.prop-item {
+  display: flex;
+  padding: 12rpx 0;
+  border-bottom: 1rpx dashed #e0e0e0;
+}
+
+.prop-item:last-child {
+  border-bottom: none;
+}
+
+.prop-name {
+  font-size: 26rpx;
+  color: #595959;
+  font-weight: 500;
+  min-width: 140rpx;
+  flex-shrink: 0;
+}
+
+.prop-value {
+  flex: 1;
+  font-size: 26rpx;
+  color: #262626;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* 详情图片 */
+.detail-images {
+  margin-bottom: 36rpx;
+  overflow: hidden;
+  border-radius: 16rpx;
+}
+
+.detail-image {
+  width: 100%;
+  display: block;
+  margin-bottom: 16rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.detail-image:last-child {
+  margin-bottom: 0;
+}
+
+/* 商品信息表格 */
+.detail-info {
+  background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 36rpx;
+  border: 1rpx solid #e8eaed;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 12rpx;
+  border-bottom: 1rpx dashed #d9d9d9;
+  transition: background 0.3s ease;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #595959;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.info-label::before {
+  content: '•';
+  color: #667eea;
+  font-size: 32rpx;
+  margin-right: 12rpx;
+  font-weight: bold;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #262626;
+  font-weight: 600;
+  max-width: 400rpx;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 温馨提示 */
+.detail-tips {
+  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+  border-radius: 16rpx;
+  padding: 28rpx;
+  border: 2rpx solid #91d5ff;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-tips::before {
+  content: '';
+  position: absolute;
+  top: -50rpx;
+  right: -50rpx;
+  width: 200rpx;
+  height: 200rpx;
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.tips-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.tips-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+}
+
+.tips-text {
+  font-size: 30rpx;
+  color: #0050b3;
+  font-weight: bold;
+  letter-spacing: 0.5rpx;
+}
+
+.tips-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.tips-item {
+  font-size: 26rpx;
+  color: #096dd9;
+  line-height: 44rpx;
+  margin-bottom: 10rpx;
+  padding-left: 8rpx;
+}
+
+.tips-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ==================== 底部占位 ==================== */
+.bottom-placeholder {
+  height: 120rpx;
+}
+
+/* ==================== 底部操作栏 ==================== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110rpx;
+  background: #ffffff;
+  border-top: 1rpx solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  z-index: 1000;
+  box-shadow: 0 -8rpx 32rpx rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(20rpx);
+}
+
+.bar-left {
+  margin-right: 24rpx;
+}
+
+.icon-btn {
+  padding: 0;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  width: 100rpx;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.icon-btn::after {
+  border: none;
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* 美化分享按钮 */
+.share-btn {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  border-radius: 20rpx;
+  padding: 16rpx 0;
+  box-shadow: 0 8rpx 20rpx rgba(252, 182, 159, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.share-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.share-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 12rpx rgba(252, 182, 159, 0.4);
+}
+
+.share-btn .btn-icon {
+  font-size: 44rpx;
+  margin-bottom: 8rpx;
+  filter: drop-shadow(0 2rpx 6rpx rgba(0, 0, 0, 0.15));
+  position: relative;
+  z-index: 1;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4rpx);
+  }
+}
+
+.share-btn .btn-text {
+  font-size: 22rpx;
+  color: #d4380d;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.icon-btn .btn-text {
+  font-size: 22rpx;
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+.bar-right {
+  flex: 1;
+  display: flex;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  font-size: 32rpx;
+  border: none;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.action-btn:active::before {
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.buy-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 12rpx 32rpx rgba(102, 126, 234, 0.5);
+}
+
+.buy-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== 加载状态 ==================== */
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.loading-spinner {
+  margin-bottom: 30rpx;
+}
+
+.spinner {
+  width: 80rpx;
+  height: 80rpx;
+  border: 6rpx solid #f0f0f0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* ==================== 空状态 ==================== */
+.empty-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  padding: 60rpx;
+}
+
+.empty-icon {
+  font-size: 160rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 40rpx;
+}
+
+.empty-btn {
+  padding: 20rpx 60rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  border: none;
+  border-radius: 50rpx;
+}
+
+.empty-btn::after {
+  border: none;
+}
+
+/* ==================== 淘口令弹窗 ==================== */
+.tpwd-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(10rpx);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tpwd-content {
+  width: 640rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tpwd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 30rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.tpwd-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400rpx;
+  height: 400rpx;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.tpwd-title {
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1rpx;
+}
+
+.tpwd-close {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.tpwd-close:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0.95);
+}
+
+.tpwd-body {
+  padding: 40rpx 30rpx;
+}
+
+.tpwd-code-wrapper {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eaed 100%);
+  border-radius: 16rpx;
+  border: 2rpx dashed #667eea;
+  margin-bottom: 32rpx;
+  position: relative;
+  box-shadow: inset 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.tpwd-code-scroll {
+  max-height: 300rpx;
+  padding: 32rpx 28rpx;
+}
+
+.tpwd-code-text {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  line-height: 44rpx;
+  word-break: break-all;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+  display: block;
+}
+
+.tpwd-tip {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx;
+  background: linear-gradient(135deg, #e6f7ff 0%, #d6e4ff 100%);
+  border-radius: 16rpx;
+  border-left: 4rpx solid #1890ff;
+}
+
+.tip-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0, 0, 0, 0.1));
+}
+
+.tip-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: #0050b3;
+  line-height: 40rpx;
+  font-weight: 500;
+}
+
+.tpwd-footer {
+  padding: 0 30rpx 40rpx;
+  display: flex;
+  gap: 20rpx;
+}
+
+.tpwd-btn {
+  flex: 1;
+  height: 88rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  border: none;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  letter-spacing: 1rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+  color: #ffffff;
+  box-shadow: 0 8rpx 24rpx rgba(82, 196, 26, 0.4);
+}
+
+.copy-btn .btn-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+}
+
+.tpwd-btn::after {
+  border: none;
+}
+
+.tpwd-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.tpwd-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 6rpx 20rpx rgba(102, 126, 234, 0.35);
+}
+
+.tpwd-btn:active::before {
+  width: 600rpx;
+  height: 600rpx;
+}

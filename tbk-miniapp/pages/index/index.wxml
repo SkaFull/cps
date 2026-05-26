@@ -1,0 +1,163 @@
+<!--pages/index/index.wxml-->
+<view class="index-container">
+
+  <!-- 安全提示滚动横幅 -->
+  <view class="safety-notice-banner">
+    <view class="notice-icon">⚠️</view>
+    <view class="notice-content">
+      <view class="notice-text-wrapper" animation="{{noticeAnimation}}">
+        <text class="notice-text">{{safetyNotice}}</text>
+        <text class="notice-text">{{safetyNotice}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 代理入口 -->
+    <view class="agent-entry" wx:if="{{!isAgent}}" bindtap="onApplyAgent">
+      <view class="agent-left">
+        <text class="agent-title">成为代理</text>
+        <text class="agent-desc">享受高额佣金</text>
+      </view>
+      <view class="agent-right">
+        <text class="agent-btn">立即申请</text>
+        <icon class="arrow-icon" type="arrow" size="16"></icon>
+      </view>
+    </view>
+
+    <!-- 代理信息 -->
+    <view class="agent-info" wx:if="{{isAgent}}">
+      <view class="agent-info-item">
+        <text class="agent-info-label">我的邀请码</text>
+        <text class="agent-info-value">{{invitationCode}}</text>
+      </view>
+      <button class="share-btn" open-type="share">
+        <icon class="share-icon" type="share" size="16"></icon>
+        <text>分享赚佣金</text>
+      </button>
+    </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input">
+        <icon class="search-icon" type="search" size="16"></icon>
+        <input
+          class="search-field"
+          type="text"
+          placeholder="搜索商品"
+          placeholder-class="search-placeholder"
+          confirm-type="search"
+          bindconfirm="onSearchConfirm"
+        />
+    </view>
+  </view>
+
+  <!-- 联盟类型选择器 -->
+  <view class="platform-selector-container">
+    <picker 
+      class="platform-picker"
+      mode="selector" 
+      range="{{platformSelectorOptions}}"
+      value="{{selectedPlatformIndex}}"
+      bindchange="onPlatformSelectorChange"
+    >
+      <view class="picker-display">
+        <text class="picker-text">{{platformSelectorOptions[selectedPlatformIndex] || '请选择'}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 轮播图 
+  <swiper class="banner-swiper" wx:if="{{banners.length > 0}}" indicator-dots autoplay interval="5000" circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="onBannerTap" data-banner="{{item}}">
+      <image class="banner-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper-->
+
+
+
+  <!-- 分类导航 
+  <scroll-view class="category-scroll" scroll-x wx:if="{{categories.length > 0}}">
+    <view class="category-list">
+      <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-category="{{item}}">
+        <image class="category-icon" src="{{item.iconUrl}}" mode="aspectFit"></image>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view-->
+
+  <!-- 热门商品 -->
+  <view class="goods-section">
+    <view class="section-title">
+      <text class="title-text">🔥 热门商品</text>
+      <view class="title-more" bindtap="onMoreTap">更多 →</view>
+    </view>
+
+    <view class="goods-list">
+      <view class="goods-item" wx:for="{{hotGoods}}" wx:key="id">
+        <view class="goods-content" bindtap="onGoodsTap" data-goods="{{item}}">
+          <image class="goods-image" src="{{item.mainPic}}" mode="aspectFill"></image>
+          <view class="goods-info">
+            <text class="goods-title">{{item.title}}</text>
+            <view class="goods-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-value">{{item.actualPrice}}</text>
+              <text class="price-original">¥{{item.originalPrice}}</text>
+            </view>
+            <view class="goods-commission">
+              <text class="commission-label">预估佣金</text>
+              <text class="commission-value">¥{{item.commission}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="goods-actions">
+          <button class="action-btn tpwd-btn" bindtap="onGetTpwd" data-goods="{{item}}">
+            <text class="btn-icon">📋</text>
+            <text class="btn-text">{{currentPlatform === 'jd' ? '京链接' : currentPlatform === 'pdd' ? '拼链接' : '淘口令'}}</text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-wrapper" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <!-- 没有更多 -->
+    <view class="no-more" wx:if="{{!hasMore && hotGoods.length > 0}}">
+      <text class="no-more-text">没有更多了</text>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && hotGoods.length === 0}}">
+      <view class="empty-icon">📦</view>
+      <text class="empty-text">暂无商品，敬请期待</text>
+    </view>
+  </view>
+
+  <!-- 淘口令/京链接/拼链接弹窗 -->
+  <view class="tpwd-modal" wx:if="{{showTpwdModal}}" bindtap="onCloseTpwdModal">
+    <view class="tpwd-modal-content" catchtap="stopPropagation">
+      <view class="tpwd-modal-header">
+        <text class="tpwd-modal-title">🎉 {{tpwdType === 'jd' ? '京链接生成成功' : tpwdType === 'pdd' ? '拼链接生成成功' : '淘口令生成成功'}}</text>
+        <text class="tpwd-modal-subtitle">已自动复制到剪贴板</text>
+      </view>
+      <view class="tpwd-modal-body">
+        <view class="tpwd-code-wrapper">
+          <scroll-view class="tpwd-code-scroll" scroll-y>
+            <text class="tpwd-code-text">{{currentTpwd}}</text>
+          </scroll-view>
+        </view>
+        <text class="tpwd-tip">{{tpwdType === 'jd' ? '打开京东APP即可查看商品详情' : tpwdType === 'pdd' ? '打开拼多多APP即可查看商品详情' : '打开手机淘宝即可查看商品详情'}}\n分享给好友即可获得佣金奖励</text>
+      </view>
+      <view class="tpwd-modal-footer">
+        <button class="tpwd-btn copy-btn" bindtap="onCopyTpwd">
+          <text class="btn-icon">📋</text>
+          <text>复制链接</text>
+        </button>
+        <button class="tpwd-btn confirm-btn" bindtap="onCloseTpwdModal">知道了</button>
+      </view>
+    </view>
+  </view>
+</view>

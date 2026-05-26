@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysOrderCommissionMapper">
+    
+    <resultMap type="com.ruoyi.system.domain.SysOrderCommission" id="SysOrderCommissionResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="platformType"    column="platform_type"    />
+        <result property="itemId"    column="item_id"    />
+        <result property="itemTitle"    column="item_title"    />
+        <result property="orderAmount"    column="order_amount"    />
+        <result property="totalCommission"    column="total_commission"    />
+        <result property="agentUserId"    column="agent_user_id"    />
+        <result property="selfCommissionRate"    column="self_commission_rate"    />
+        <result property="selfCommissionAmount"    column="self_commission_amount"    />
+        <result property="hasReferrer"    column="has_referrer"    />
+        <result property="referrerUserId"    column="referrer_user_id"    />
+        <result property="promotionCommissionRate"    column="promotion_commission_rate"    />
+        <result property="promotionCommissionAmount"    column="promotion_commission_amount"    />
+        <result property="platformAmount"    column="platform_amount"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="settleTime"    column="settle_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysOrderCommissionVo">
+        select id, order_id, platform_type, item_id, item_title, order_amount, 
+               total_commission, agent_user_id, 
+               self_commission_rate, self_commission_amount, 
+               has_referrer, referrer_user_id,
+               promotion_commission_rate, promotion_commission_amount, platform_amount,
+               order_status, settle_time, 
+               create_time, update_time
+        from sys_order_commission
+    </sql>
+
+    <select id="selectSysOrderCommissionList" parameterType="com.ruoyi.system.domain.SysOrderCommission" resultMap="SysOrderCommissionResult">
+        <include refid="selectSysOrderCommissionVo"/>
+        <where>  
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="platformType != null  and platformType != ''"> and platform_type = #{platformType}</if>
+            <if test="itemId != null  and itemId != ''"> and item_id = #{itemId}</if>
+            <if test="buyerUserId != null "> and buyer_user_id = #{buyerUserId}</if>
+            <if test="hasReferrer != null  and hasReferrer != ''"> and has_referrer = #{hasReferrer}</if>
+            <if test="referrerUserId != null "> and referrer_user_id = #{referrerUserId}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="settleStatus != null  and settleStatus != ''"> and settle_status = #{settleStatus}</if>
+            <if test="params.beginOrderTime != null and params.beginOrderTime != ''">
+                and order_time &gt;= #{params.beginOrderTime}
+            </if>
+            <if test="params.endOrderTime != null and params.endOrderTime != ''">
+                and order_time &lt;= #{params.endOrderTime}
+            </if>
+            <if test="params.beginSettleTime != null and params.beginSettleTime != ''">
+                and settle_time &gt;= #{params.beginSettleTime}
+            </if>
+            <if test="params.endSettleTime != null and params.endSettleTime != ''">
+                and settle_time &lt;= #{params.endSettleTime}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectSysOrderCommissionById" parameterType="Long" resultMap="SysOrderCommissionResult">
+        <include refid="selectSysOrderCommissionVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSysOrderCommissionByOrderIdAndPlatformType" resultMap="SysOrderCommissionResult">
+        <include refid="selectSysOrderCommissionVo"/>
+        where order_id = #{orderId} and platform_type = #{platformType}
+    </select>
+
+    <insert id="insertSysOrderCommission" parameterType="com.ruoyi.system.domain.SysOrderCommission" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_order_commission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null and orderId != ''">order_id,</if>
+            <if test="platformType != null and platformType != ''">platform_type,</if>
+            <if test="itemId != null and itemId != ''">item_id,</if>
+            <if test="itemTitle != null">item_title,</if>
+            <if test="orderAmount != null">order_amount,</if>
+            <if test="totalCommission != null">total_commission,</if>
+            <if test="agentUserId != null">agent_user_id,</if>
+            <if test="selfCommissionRate != null">self_commission_rate,</if>
+            <if test="selfCommissionAmount != null">self_commission_amount,</if>
+            <if test="hasReferrer != null">has_referrer,</if>
+            <if test="referrerUserId != null">referrer_user_id,</if>
+            <if test="promotionCommissionRate != null">promotion_commission_rate,</if>
+            <if test="promotionCommissionAmount != null">promotion_commission_amount,</if>
+            <if test="platformAmount != null">platform_amount,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="settleTime != null">settle_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null and orderId != ''">#{orderId},</if>
+            <if test="platformType != null and platformType != ''">#{platformType},</if>
+            <if test="itemId != null and itemId != ''">#{itemId},</if>
+            <if test="itemTitle != null">#{itemTitle},</if>
+            <if test="orderAmount != null">#{orderAmount},</if>
+            <if test="totalCommission != null">#{totalCommission},</if>
+            <if test="agentUserId != null">#{agentUserId},</if>
+            <if test="selfCommissionRate != null">#{selfCommissionRate},</if>
+            <if test="selfCommissionAmount != null">#{selfCommissionAmount},</if>
+            <if test="hasReferrer != null">#{hasReferrer},</if>
+            <if test="referrerUserId != null">#{referrerUserId},</if>
+            <if test="promotionCommissionRate != null">#{promotionCommissionRate},</if>
+            <if test="promotionCommissionAmount != null">#{promotionCommissionAmount},</if>
+            <if test="platformAmount != null">#{platformAmount},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="settleTime != null">#{settleTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysOrderCommission" parameterType="com.ruoyi.system.domain.SysOrderCommission">
+        update sys_order_commission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null and orderId != ''">order_id = #{orderId},</if>
+            <if test="platformType != null and platformType != ''">platform_type = #{platformType},</if>
+            <if test="itemId != null and itemId != ''">item_id = #{itemId},</if>
+            <if test="itemTitle != null">item_title = #{itemTitle},</if>
+            <if test="orderAmount != null">order_amount = #{orderAmount},</if>
+            <if test="totalCommission != null">total_commission = #{totalCommission},</if>
+            <if test="agentUserId != null">agent_user_id = #{agentUserId},</if>
+            <if test="selfCommissionRate != null">self_commission_rate = #{selfCommissionRate},</if>
+            <if test="selfCommissionAmount != null">self_commission_amount = #{selfCommissionAmount},</if>
+            <if test="hasReferrer != null">has_referrer = #{hasReferrer},</if>
+            <if test="referrerUserId != null">referrer_user_id = #{referrerUserId},</if>
+            <if test="promotionCommissionRate != null">promotion_commission_rate = #{promotionCommissionRate},</if>
+            <if test="promotionCommissionAmount != null">promotion_commission_amount = #{promotionCommissionAmount},</if>
+            <if test="platformAmount != null">platform_amount = #{platformAmount},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="settleTime != null">settle_time = #{settleTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysOrderCommissionById" parameterType="Long">
+        delete from sys_order_commission where id = #{id}
+    </delete>
+
+    <delete id="deleteSysOrderCommissionByIds" parameterType="String">
+        delete from sys_order_commission where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

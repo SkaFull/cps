@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MiniappSessionMapper">
+    
+    <resultMap type="MiniappSession" id="MiniappSessionResult">
+        <id     property="sessionId"       column="session_id"      />
+        <result property="userId"          column="user_id"         />
+        <result property="openId"          column="open_id"         />
+        <result property="sessionKey"      column="session_key"     />
+        <result property="accessToken"     column="access_token"    />
+        <result property="refreshToken"    column="refresh_token"   />
+        <result property="expiresAt"       column="expires_at"      />
+        <result property="refreshExpiresAt" column="refresh_expires_at" />
+        <result property="createTime"      column="create_time"     />
+        <result property="updateTime"      column="update_time"     />
+    </resultMap>
+
+    <sql id="selectMiniappSessionVo">
+        select session_id, user_id, open_id, session_key, access_token, 
+               refresh_token, expires_at, refresh_expires_at, create_time, update_time
+        from sys_miniapp_session
+    </sql>
+
+    <select id="selectMiniappSessionById" parameterType="String" resultMap="MiniappSessionResult">
+        <include refid="selectMiniappSessionVo"/>
+        where session_id = #{sessionId}
+    </select>
+
+    <select id="selectMiniappSessionByUserId" parameterType="Long" resultMap="MiniappSessionResult">
+        <include refid="selectMiniappSessionVo"/>
+        where user_id = #{userId}
+        order by create_time desc
+        limit 1
+    </select>
+
+    <select id="selectMiniappSessionByOpenId" parameterType="String" resultMap="MiniappSessionResult">
+        <include refid="selectMiniappSessionVo"/>
+        where open_id = #{openId}
+        order by create_time desc
+        limit 1
+    </select>
+
+    <select id="selectMiniappSessionByAccessToken" parameterType="String" resultMap="MiniappSessionResult">
+        <include refid="selectMiniappSessionVo"/>
+        where access_token = #{accessToken}
+        and expires_at > now()
+    </select>
+
+    <select id="selectMiniappSessionByRefreshToken" parameterType="String" resultMap="MiniappSessionResult">
+        <include refid="selectMiniappSessionVo"/>
+        where refresh_token = #{refreshToken}
+        and refresh_expires_at > now()
+    </select>
+
+    <insert id="insertMiniappSession" parameterType="MiniappSession">
+        insert into sys_miniapp_session
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sessionId != null and sessionId != ''">session_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="openId != null and openId != ''">open_id,</if>
+            <if test="sessionKey != null and sessionKey != ''">session_key,</if>
+            <if test="accessToken != null and accessToken != ''">access_token,</if>
+            <if test="refreshToken != null and refreshToken != ''">refresh_token,</if>
+            <if test="expiresAt != null">expires_at,</if>
+            <if test="refreshExpiresAt != null">refresh_expires_at,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sessionId != null and sessionId != ''">#{sessionId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="openId != null and openId != ''">#{openId},</if>
+            <if test="sessionKey != null and sessionKey != ''">#{sessionKey},</if>
+            <if test="accessToken != null and accessToken != ''">#{accessToken},</if>
+            <if test="refreshToken != null and refreshToken != ''">#{refreshToken},</if>
+            <if test="expiresAt != null">#{expiresAt},</if>
+            <if test="refreshExpiresAt != null">#{refreshExpiresAt},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMiniappSession" parameterType="MiniappSession">
+        update sys_miniapp_session
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="sessionKey != null and sessionKey != ''">session_key = #{sessionKey},</if>
+            <if test="accessToken != null and accessToken != ''">access_token = #{accessToken},</if>
+            <if test="refreshToken != null and refreshToken != ''">refresh_token = #{refreshToken},</if>
+            <if test="expiresAt != null">expires_at = #{expiresAt},</if>
+            <if test="refreshExpiresAt != null">refresh_expires_at = #{refreshExpiresAt},</if>
+            update_time = now()
+        </trim>
+        where session_id = #{sessionId}
+    </update>
+
+    <delete id="deleteMiniappSessionById" parameterType="String">
+        delete from sys_miniapp_session where session_id = #{sessionId}
+    </delete>
+
+    <delete id="deleteMiniappSessionByUserId" parameterType="Long">
+        delete from sys_miniapp_session where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteExpiredSessions">
+        delete from sys_miniapp_session 
+        where refresh_expires_at &lt; now()
+    </delete>
+
+</mapper>

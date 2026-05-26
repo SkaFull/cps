@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysCommissionConfigMapper">
+    
+    <resultMap type="com.ruoyi.system.domain.SysCommissionConfig" id="SysCommissionConfigResult">
+        <result property="configKey"    column="config_key"    />
+        <result property="configValue"    column="config_value"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysCommissionConfigVo">
+        select config_key, config_value, create_time, update_time
+        from sys_commission_config
+    </sql>
+
+    <select id="selectSysCommissionConfigList" parameterType="com.ruoyi.system.domain.SysCommissionConfig" resultMap="SysCommissionConfigResult">
+        <include refid="selectSysCommissionConfigVo"/>
+        <where>  
+            <if test="configKey != null  and configKey != ''"> and config_key = #{configKey}</if>
+        </where>
+        order by config_key
+    </select>
+    
+    <select id="selectSysCommissionConfigByKey" parameterType="String" resultMap="SysCommissionConfigResult">
+        <include refid="selectSysCommissionConfigVo"/>
+        where config_key = #{configKey}
+    </select>
+
+    <insert id="insertSysCommissionConfig" parameterType="com.ruoyi.system.domain.SysCommissionConfig">
+        insert into sys_commission_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">config_key,</if>
+            <if test="configValue != null">config_value,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">#{configKey},</if>
+            <if test="configValue != null">#{configValue},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCommissionConfig" parameterType="com.ruoyi.system.domain.SysCommissionConfig">
+        update sys_commission_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configValue != null">config_value = #{configValue},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where config_key = #{configKey}
+    </update>
+
+    <delete id="deleteSysCommissionConfigByKey" parameterType="String">
+        delete from sys_commission_config where config_key = #{configKey}
+    </delete>
+
+    <delete id="deleteSysCommissionConfigByKeys" parameterType="String">
+        delete from sys_commission_config where config_key in 
+        <foreach item="configKey" collection="array" open="(" separator="," close=")">
+            #{configKey}
+        </foreach>
+    </delete>
+</mapper>

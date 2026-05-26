@@ -1,0 +1,111 @@
+<!--pages/user/center/center.wxml-->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-header">
+      <!-- 头像显示：优先显示用户头像，无头像时显示默认图片 -->
+      <view class="avatar-wrapper">
+        <image class="avatar" src="{{userInfo && userInfo.avatarUrl ? userInfo.avatarUrl : '/images/default-avatar.svg'}}" mode="aspectFill"></image>
+      </view>
+      <view class="user-info">
+        <view wx:if="{{isLoggedIn}}">
+          <view class="nickname">{{userInfo.nickName || '淘客用户'}}</view>
+          <view class="user-id">ID: {{userInfo.userId || '-'}}</view>
+        </view>
+        <view wx:else class="login-tip" bindtap="handleLogin">
+          <text>点击登录</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 代理信息 -->
+    <view wx:if="{{isLoggedIn}}" class="agent-section">
+      <view wx:if="{{isAgent}}" class="agent-card">
+        <view class="agent-badge" bindtap="handleAgentAction">
+          <text class="badge-icon">👑</text>
+          <text class="badge-text">代理商</text>
+          <text class="agent-level-tag">Lv.{{agentInfo.agentLevel || 1}}</text>
+        </view>
+        
+        <!-- 代理等级与邀请信息 -->
+        <view class="agent-info-grid">
+          <view class="info-item">
+            <text class="info-icon">⭐</text>
+            <view class="info-content">
+              <text class="info-label">代理等级</text>
+              <text class="info-value">{{agentInfo.agentLevel === 1 ? '一级代理' : agentInfo.agentLevel === 2 ? '二级代理' : '代理'}}</text>
+            </view>
+          </view>
+          <view class="info-item">
+            <text class="info-icon">👥</text>
+            <view class="info-content">
+              <text class="info-label">已邀请</text>
+              <text class="info-value">{{agentInfo.invitedCount || 0}} 人</text>
+            </view>
+          </view>
+          <view class="info-item">
+            <text class="info-icon">🎯</text>
+            <view class="info-content">
+              <text class="info-label">邀请上限</text>
+              <text class="info-value">{{agentInfo.inviteLimit || 0}} 人</text>
+            </view>
+          </view>
+          <view class="info-item">
+            <text class="info-icon">✨</text>
+            <view class="info-content">
+              <text class="info-label">剩余名额</text>
+              <text class="info-value highlight">{{agentInfo.remainingInvites || 0}} 人</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="invite-code-row" catchtap="handleCopyInviteCode">
+          <text class="code-label">邀请码:</text>
+          <text class="code-value">{{agentInfo.invitationCode || '-'}}</text>
+          <button class="copy-btn" bindtap="handleCopyInviteCode">
+            <text class="copy-icon">📋</text>
+            <text>复制</text>
+          </button>
+        </view>
+      </view>
+      <view wx:elif="{{agentInfo && agentInfo.status === 0}}" class="agent-status pending" bindtap="handleAgentAction">
+        <text class="status-icon">⏳</text>
+        <text class="status-text">代理申请审核中</text>
+      </view>
+      <view wx:else class="agent-apply" bindtap="handleAgentAction">
+        <text class="apply-icon">💼</text>
+        <text class="apply-text">申请成为代理</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view 
+      wx:for="{{menuList}}" 
+      wx:key="id" 
+      class="menu-item {{item.agentOnly && !isAgent ? 'disabled' : ''}}"
+      data-item="{{item}}"
+      bindtap="handleMenuClick"
+    >
+      <view class="menu-left">
+        <text class="menu-icon">{{item.icon}}</text>
+        <text class="menu-name">{{item.name}}</text>
+        <text wx:if="{{item.agentOnly && !isAgent}}" class="agent-tag">代理专属</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view wx:if="{{isLoggedIn}}" class="logout-section">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text class="version-text">版本号: 1.0.0</text>
+  </view>
+</view>

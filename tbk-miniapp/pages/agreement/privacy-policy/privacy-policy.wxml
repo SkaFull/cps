@@ -1,0 +1,205 @@
+<!--pages/agreement/privacy-policy/privacy-policy.wxml-->
+<view class="agreement-container">
+  <!-- 顶部标题栏 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="title">隐私政策</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 协议内容 -->
+  <scroll-view class="content" scroll-y="true">
+    <view class="agreement-content">
+      <!-- 标题 -->
+      <view class="section-title main-title">
+        实佣有你平台隐私政策
+      </view>
+      
+      <view class="update-time">更新日期：2026年4月4日</view>
+      <view class="update-time">生效日期：2026年4月4日</view>
+
+      <!-- 提示 -->
+      <view class="important-notice">
+        <text class="notice-icon">🔒</text>
+        <text class="notice-text">我们非常重视您的隐私保护。本隐私政策详细说明了我们如何收集、使用、存储和保护您的个人信息。请仔细阅读并充分理解本政策内容。</text>
+      </view>
+
+      <!-- 引言 -->
+      <view class="section">
+        <view class="section-title">引言</view>
+        <view class="section-content">
+          <text class="paragraph">实佣有你平台（以下简称"我们"）深知个人信息对您的重要性，我们将按照法律法规要求，采取相应的安全保护措施，尽力保护您的个人信息安全可控。</text>
+          
+          <text class="paragraph">本隐私政策适用于您通过微信小程序使用我们提供的商品推广、佣金结算等服务。</text>
+        </view>
+      </view>
+
+      <!-- 第一条 -->
+      <view class="section">
+        <view class="section-title">一、我们如何收集和使用您的个人信息</view>
+        <view class="section-content">
+          <text class="paragraph strong">1.1 我们收集的信息类型</text>
+          
+          <text class="paragraph">（1）账号信息</text>
+          <text class="sub-item">• 微信授权信息：昵称、头像、性别、地区</text>
+          <text class="sub-item">• 微信OpenID（用于身份识别）</text>
+          <text class="sub-item">• 手机号码（如您选择提供）</text>
+          
+          <text class="paragraph">（2）业务信息</text>
+          <text class="sub-item">• 联盟平台账号信息（PID、会员ID等）</text>
+          <text class="sub-item">• 推广数据（点击量、订单量、佣金等）</text>
+          <text class="sub-item">• 提现信息（收款账户、提现记录）</text>
+          
+          <text class="paragraph">（3）设备信息</text>
+          <text class="sub-item">• 设备型号、操作系统版本</text>
+          <text class="sub-item">• 网络类型、IP地址</text>
+          <text class="sub-item">• 小程序使用记录</text>
+          
+          <text class="paragraph strong">1.2 信息使用目的</text>
+          <text class="sub-item">• 提供核心服务：账号注册、商品推广、佣金结算</text>
+          <text class="sub-item">• 改进服务质量：分析用户行为、优化产品功能</text>
+          <text class="sub-item">• 安全保障：防范欺诈、识别违规行为</text>
+          <text class="sub-item">• 客户服务：响应咨询、处理投诉</text>
+        </view>
+      </view>
+
+      <!-- 第二条 -->
+      <view class="section">
+        <view class="section-title">二、我们如何使用Cookie等技术</view>
+        <view class="section-content">
+          <text class="paragraph">2.1 为提供更好的用户体验，我们可能使用Cookie、本地存储等技术收集和存储您的偏好设置、浏览记录等信息。</text>
+          
+          <text class="paragraph">2.2 您可以通过微信设置管理或清除这些数据，但可能影响部分功能的使用。</text>
+        </view>
+      </view>
+
+      <!-- 第三条 -->
+      <view class="section">
+        <view class="section-title">三、我们如何共享、转让、公开披露您的个人信息</view>
+        <view class="section-content">
+          <text class="paragraph strong">3.1 共享</text>
+          <text class="paragraph">我们不会与任何公司、组织和个人分享您的个人信息，但以下情况除外：</text>
+          <text class="sub-item">• 获得您的明确同意</text>
+          <text class="sub-item">• 与合作的联盟平台共享必要信息（仅限于完成服务所需）</text>
+          <text class="sub-item">• 与授权合作伙伴共享：我们可能委托受信赖的合作伙伴处理您的信息</text>
+          <text class="sub-item">• 法律法规要求的其他情形</text>
+          
+          <text class="paragraph strong">3.2 转让</text>
+          <text class="paragraph">我们不会将您的个人信息转让给任何公司、组织和个人，但以下情况除外：</text>
+          <text class="sub-item">• 获得您的明确同意</text>
+          <text class="sub-item">• 在涉及合并、收购或破产清算时，如涉及个人信息转让，我们会要求新持有者继续受本政策约束</text>
+          
+          <text class="paragraph strong">3.3 公开披露</text>
+          <text class="paragraph">我们仅会在以下情况下公开披露您的个人信息：</text>
+          <text class="sub-item">• 获得您的明确同意</text>
+          <text class="sub-item">• 基于法律法规、诉讼、仲裁或政府主管部门的要求</text>
+        </view>
+      </view>
+
+      <!-- 第四条 -->
+      <view class="section">
+        <view class="section-title">四、我们如何保护您的个人信息</view>
+        <view class="section-content">
+          <text class="paragraph">4.1 我们采取符合业界标准的安全措施保护您的个人信息：</text>
+          <text class="sub-item">• 数据加密传输（HTTPS/SSL）</text>
+          <text class="sub-item">• 数据库访问权限控制</text>
+          <text class="sub-item">• 敏感信息加密存储</text>
+          <text class="sub-item">• 定期安全审计和漏洞扫描</text>
+          
+          <text class="paragraph">4.2 我们会采取合理措施防止数据泄露、丢失、未经授权访问或披露。</text>
+          
+          <text class="paragraph">4.3 如发生个人信息安全事件，我们会及时告知您：事件的基本情况、可能的影响、已采取的处置措施等。</text>
+        </view>
+      </view>
+
+      <!-- 第五条 -->
+      <view class="section">
+        <view class="section-title">五、您的权利</view>
+        <view class="section-content">
+          <text class="paragraph">按照中国相关法律法规，您对个人信息享有以下权利：</text>
+          
+          <text class="paragraph strong">5.1 访问权</text>
+          <text class="paragraph">您有权访问您的个人信息，可通过"我的"页面查看和管理。</text>
+          
+          <text class="paragraph strong">5.2 更正权</text>
+          <text class="paragraph">当您发现个人信息有误时，有权要求我们更正。</text>
+          
+          <text class="paragraph strong">5.3 删除权</text>
+          <text class="paragraph">在以下情形下，您可以要求我们删除个人信息：</text>
+          <text class="sub-item">• 处理目的已实现、无法实现或不再必要</text>
+          <text class="sub-item">• 我们停止提供服务或保存期限已届满</text>
+          <text class="sub-item">• 您撤回同意</text>
+          <text class="sub-item">• 我们违法处理您的个人信息</text>
+          
+          <text class="paragraph strong">5.4 撤回同意</text>
+          <text class="paragraph">您可以通过关闭功能、注销账号等方式撤回授权同意。</text>
+          
+          <text class="paragraph strong">5.5 注销账号</text>
+          <text class="paragraph">您可以通过平台客服申请注销账号。注销后我们将停止提供服务，并删除您的个人信息（法律法规另有规定的除外）。</text>
+        </view>
+      </view>
+
+      <!-- 第六条 -->
+      <view class="section">
+        <view class="section-title">六、未成年人信息保护</view>
+        <view class="section-content">
+          <text class="paragraph">6.1 我们非常重视未成年人的个人信息保护。如您为未成年人，请在监护人指导下使用我们的服务。</text>
+          
+          <text class="paragraph">6.2 如监护人发现未成年人未经同意向我们提供了个人信息，请通过客服联系我们，我们会及时删除相关信息。</text>
+        </view>
+      </view>
+
+      <!-- 第七条 -->
+      <view class="section">
+        <view class="section-title">七、信息存储</view>
+        <view class="section-content">
+          <text class="paragraph">7.1 存储地点：您的个人信息将存储于中华人民共和国境内。如需跨境传输，我们会单独征得您的同意。</text>
+          
+          <text class="paragraph">7.2 存储期限：我们仅在实现服务目的所必需的期限内保留您的个人信息。您注销账号后，我们会删除或匿名化处理您的个人信息，法律法规另有规定的除外。</text>
+        </view>
+      </view>
+
+      <!-- 第八条 -->
+      <view class="section">
+        <view class="section-title">八、隐私政策的变更</view>
+        <view class="section-content">
+          <text class="paragraph">8.1 我们可能适时修订本隐私政策。未经您明确同意，我们不会削减您按照本隐私政策所应享有的权利。</text>
+          
+          <text class="paragraph">8.2 对于重大变更，我们会通过站内信、弹窗等方式通知您。</text>
+          
+          <text class="paragraph">8.3 重大变更包括但不限于：</text>
+          <text class="sub-item">• 服务模式发生重大变化</text>
+          <text class="sub-item">• 个人信息共享、转让或公开披露的主要对象发生变化</text>
+          <text class="sub-item">• 您参与个人信息处理的权利发生重大变化</text>
+        </view>
+      </view>
+
+      <!-- 第九条 -->
+      <view class="section">
+        <view class="section-title">九、如何联系我们</view>
+        <view class="section-content">
+          <text class="paragraph">如您对本隐私政策有任何疑问、意见或建议，可通过以下方式联系我们：</text>
+          <text class="sub-item">• 客服邮箱：privacy@example.com</text>
+          <text class="sub-item">• 在线客服：通过小程序客服功能联系</text>
+          
+          <text class="paragraph">我们将在15个工作日内回复您的请求。</text>
+        </view>
+      </view>
+
+      <!-- 联系方式 -->
+      <view class="contact-section">
+        <view class="contact-title">联系我们</view>
+        <text class="contact-item">平台名称：实佣有你</text>
+        <text class="contact-item">隐私保护邮箱：privacy@example.com</text>
+        <text class="contact-item">客服时间：工作日 9:00-18:00</text>
+      </view>
+
+      <!-- 底部提示 -->
+      <view class="bottom-tip">
+        您的信任对我们非常重要，我们将严格遵守本隐私政策保护您的个人信息！
+      </view>
+    </view>
+  </scroll-view>
+</view>

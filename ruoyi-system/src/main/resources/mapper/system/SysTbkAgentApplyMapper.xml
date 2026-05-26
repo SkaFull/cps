@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysTbkAgentApplyMapper">
+    
+    <resultMap type="SysTbkAgentApply" id="SysTbkAgentApplyResult">
+        <result property="id"                   column="id"                    />
+        <result property="userId"               column="user_id"               />
+        <result property="miniAppId"            column="mini_app_id"           />
+        <result property="realName"             column="real_name"             />
+        <result property="phone"                column="phone"                 />
+        <result property="wechat"               column="wechat"                />
+        <result property="invitationCode"       column="invitation_code"       />
+        <result property="referrerInvitationCode" column="referrer_invitation_code" />
+        <result property="agentLevel"           column="agent_level"           />
+        <result property="applyPlatformTypes"   column="apply_platform_types"  />
+        <result property="status"               column="status"                />
+        <result property="auditBy"              column="audit_by"              />
+        <result property="auditTime"            column="audit_time"            />
+        <result property="auditRemark"          column="audit_remark"          />
+        <result property="createBy"             column="create_by"             />
+        <result property="createTime"           column="create_time"           />
+        <result property="updateBy"             column="update_by"             />
+        <result property="updateTime"           column="update_time"           />
+        <result property="remark"               column="remark"                />
+        <association property="user" column="user_id" javaType="SysUser" resultMap="userResult" />
+    </resultMap>
+
+    <resultMap type="SysUser" id="userResult">
+        <result property="userId"      column="user_user_id"      />
+        <result property="userName"    column="user_user_name"    />
+        <result property="nickName"    column="user_nick_name"    />
+        <result property="email"       column="user_email"        />
+        <result property="phonenumber" column="user_phonenumber"  />
+        <result property="sex"         column="user_sex"          />
+        <result property="avatar"      column="user_avatar"       />
+        <result property="status"      column="user_status"       />
+    </resultMap>
+
+    <sql id="selectSysTbkAgentApplyVo">
+        select a.id, a.user_id, a.mini_app_id, a.real_name, a.phone, a.wechat, a.invitation_code, 
+               a.referrer_invitation_code, a.agent_level, a.apply_platform_types, a.status, a.audit_by, a.audit_time, a.audit_remark,
+               a.create_by, a.create_time, a.update_by, a.update_time, a.remark,
+               u.user_id as user_user_id, u.user_name as user_user_name, u.nick_name as user_nick_name,
+               u.email as user_email, u.phonenumber as user_phonenumber, u.sex as user_sex,
+               u.avatar as user_avatar, u.status as user_status
+        from sys_tbk_agent_apply a
+        left join sys_user u on a.user_id = u.user_id
+    </sql>
+
+    <select id="selectSysTbkAgentApplyList" parameterType="SysTbkAgentApply" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        <where>  
+            <if test="userId != null">and a.user_id = #{userId}</if>
+            <if test="miniAppId != null and miniAppId != ''">and a.mini_app_id = #{miniAppId}</if>
+            <if test="realName != null and realName != ''">and a.real_name like concat('%', #{realName}, '%')</if>
+            <if test="phone != null and phone != ''">and a.phone = #{phone}</if>
+            <if test="invitationCode != null and invitationCode != ''">and a.invitation_code = #{invitationCode}</if>
+            <if test="status != null and status != ''">and a.status = #{status}</if>
+        </where>
+        order by a.create_time desc
+    </select>
+    
+    <select id="selectSysTbkAgentApplyById" parameterType="Long" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.id = #{id}
+    </select>
+
+    <select id="selectSysTbkAgentApplyByUserId" parameterType="Long" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.user_id = #{userId}
+    </select>
+
+    <select id="selectSysTbkAgentApplyByInvitationCode" parameterType="String" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.invitation_code = #{invitationCode}
+    </select>
+
+    <select id="selectSysTbkAgentApplyByMiniAppId" parameterType="String" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.mini_app_id = #{miniAppId}
+    </select>
+
+    <!-- 简化方法名的SQL映射 -->
+    <select id="selectByUserId" parameterType="Long" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.user_id = #{userId}
+    </select>
+
+    <select id="selectByInvitationCode" parameterType="String" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.invitation_code = #{invitationCode}
+    </select>
+
+    <select id="selectByMiniAppId" parameterType="String" resultMap="SysTbkAgentApplyResult">
+        <include refid="selectSysTbkAgentApplyVo"/>
+        where a.mini_app_id = #{miniAppId}
+    </select>
+
+    <insert id="insertSysTbkAgentApply" parameterType="SysTbkAgentApply" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_tbk_agent_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="miniAppId != null and miniAppId != ''">mini_app_id,</if>
+            <if test="realName != null and realName != ''">real_name,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="wechat != null and wechat != ''">wechat,</if>
+            <if test="invitationCode != null and invitationCode != ''">invitation_code,</if>
+            <if test="referrerInvitationCode != null and referrerInvitationCode != ''">referrer_invitation_code,</if>
+            <if test="agentLevel != null">agent_level,</if>
+            <if test="applyPlatformTypes != null and applyPlatformTypes != ''">apply_platform_types,</if>
+            <if test="status != null">status,</if>
+            <if test="auditBy != null">audit_by,</if>
+            <if test="auditTime != null">audit_time,</if>
+            <if test="auditRemark != null">audit_remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="miniAppId != null and miniAppId != ''">#{miniAppId},</if>
+            <if test="realName != null and realName != ''">#{realName},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="wechat != null and wechat != ''">#{wechat},</if>
+            <if test="invitationCode != null and invitationCode != ''">#{invitationCode},</if>
+            <if test="referrerInvitationCode != null and referrerInvitationCode != ''">#{referrerInvitationCode},</if>
+            <if test="agentLevel != null">#{agentLevel},</if>
+            <if test="applyPlatformTypes != null and applyPlatformTypes != ''">#{applyPlatformTypes},</if>
+            <if test="status != null">#{status},</if>
+            <if test="auditBy != null">#{auditBy},</if>
+            <if test="auditTime != null">#{auditTime},</if>
+            <if test="auditRemark != null">#{auditRemark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysTbkAgentApply" parameterType="SysTbkAgentApply">
+        update sys_tbk_agent_apply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="miniAppId != null and miniAppId != ''">mini_app_id = #{miniAppId},</if>
+            <if test="realName != null and realName != ''">real_name = #{realName},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="wechat != null and wechat != ''">wechat = #{wechat},</if>
+            <if test="invitationCode != null and invitationCode != ''">invitation_code = #{invitationCode},</if>
+            <if test="referrerInvitationCode != null and referrerInvitationCode != ''">referrer_invitation_code = #{referrerInvitationCode},</if>
+            <if test="agentLevel != null">agent_level = #{agentLevel},</if>
+            <if test="applyPlatformTypes != null and applyPlatformTypes != ''">apply_platform_types = #{applyPlatformTypes},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="auditBy != null">audit_by = #{auditBy},</if>
+            <if test="auditTime != null">audit_time = #{auditTime},</if>
+            <if test="auditRemark != null">audit_remark = #{auditRemark},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysTbkAgentApplyById" parameterType="Long">
+        delete from sys_tbk_agent_apply where id = #{id}
+    </delete>
+
+    <delete id="deleteSysTbkAgentApplyByIds" parameterType="String">
+        delete from sys_tbk_agent_apply where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 统计指定邀请码的下级代理数量 -->
+    <select id="countSubordinatesByInvitationCode" parameterType="String" resultType="int">
+        select count(*) from sys_tbk_agent_apply
+        where referrer_invitation_code = #{invitationCode}
+        and status = '1'
+    </select>
+
+</mapper>

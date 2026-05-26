@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUnionPlatformMapper">
+
+    <resultMap type="SysUnionPlatform" id="SysUnionPlatformResult">
+        <result property="id"           column="id"            />
+        <result property="platformType" column="platform_type" />
+        <result property="platformName" column="platform_name" />
+        <result property="appKey"       column="app_key"       />
+        <result property="appSecret"    column="app_secret"    />
+        <result property="siteId"       column="site_id"       />
+        <result property="adzoneId"     column="adzone_id"     />
+        <result property="accessToken"  column="access_token"  />
+        <result property="isQuote"      column="is_quote"      />
+        <result property="createBy"     column="create_by"     />
+        <result property="createTime"   column="create_time"   />
+        <result property="updateBy"     column="update_by"     />
+        <result property="updateTime"   column="update_time"   />
+        <result property="remark"       column="remark"        />
+    </resultMap>
+
+    <sql id="selectSysUnionPlatformVo">
+        select id, platform_type, platform_name, app_key, app_secret, site_id, adzone_id, access_token,
+               is_quote, create_by, create_time, update_by, update_time, remark
+        from sys_union_platform
+    </sql>
+
+    <select id="selectSysUnionPlatformById" parameterType="Long" resultMap="SysUnionPlatformResult">
+        <include refid="selectSysUnionPlatformVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectAvailableByPlatformType" parameterType="String" resultMap="SysUnionPlatformResult">
+        <include refid="selectSysUnionPlatformVo"/>
+        where platform_type = #{platformType} and is_quote = '0'
+        order by id asc
+    </select>
+
+    <select id="selectSysUnionPlatformList" parameterType="SysUnionPlatform" resultMap="SysUnionPlatformResult">
+        <include refid="selectSysUnionPlatformVo"/>
+        <where>
+            <if test="platformType != null and platformType != ''">
+                and platform_type = #{platformType}
+            </if>
+            <if test="appKey != null and appKey != ''">
+                and app_key like concat('%', #{appKey}, '%')
+            </if>
+            <if test="isQuote != null and isQuote != ''">
+                and is_quote = #{isQuote}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <insert id="insertSysUnionPlatform" parameterType="SysUnionPlatform" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_union_platform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platformType != null and platformType != ''">platform_type,</if>
+            <if test="platformName != null and platformName != ''">platform_name,</if>
+            <if test="appKey != null and appKey != ''">app_key,</if>
+            <if test="appSecret != null">app_secret,</if>
+            <if test="siteId != null">site_id,</if>
+            <if test="adzoneId != null">adzone_id,</if>
+            <if test="accessToken != null">access_token,</if>
+            <if test="isQuote != null and isQuote != ''">is_quote,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="remark != null">remark,</if>
+            create_time,
+            update_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="platformType != null and platformType != ''">#{platformType},</if>
+            <if test="platformName != null and platformName != ''">#{platformName},</if>
+            <if test="appKey != null and appKey != ''">#{appKey},</if>
+            <if test="appSecret != null">#{appSecret},</if>
+            <if test="siteId != null">#{siteId},</if>
+            <if test="adzoneId != null">#{adzoneId},</if>
+            <if test="accessToken != null">#{accessToken},</if>
+            <if test="isQuote != null and isQuote != ''">#{isQuote},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="remark != null">#{remark},</if>
+            now(),
+            now()
+        </trim>
+    </insert>
+
+    <update id="updateSysUnionPlatform" parameterType="SysUnionPlatform">
+        update sys_union_platform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="platformType != null and platformType != ''">platform_type = #{platformType},</if>
+            <if test="platformName != null and platformName != ''">platform_name = #{platformName},</if>
+            <if test="appKey != null and appKey != ''">app_key = #{appKey},</if>
+            <if test="appSecret != null">app_secret = #{appSecret},</if>
+            <if test="siteId != null">site_id = #{siteId},</if>
+            <if test="adzoneId != null">adzone_id = #{adzoneId},</if>
+            <if test="accessToken != null">access_token = #{accessToken},</if>
+            <if test="isQuote != null and isQuote != ''">is_quote = #{isQuote},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = now()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysUnionPlatformById" parameterType="Long">
+        delete from sys_union_platform where id = #{id}
+    </delete>
+
+    <delete id="deleteSysUnionPlatformByIds" parameterType="Long">
+        delete from sys_union_platform where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

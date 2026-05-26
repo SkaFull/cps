@@ -1,0 +1,231 @@
+<!--pages/agreement/user-agreement/user-agreement.wxml-->
+<view class="agreement-container">
+  <!-- 顶部标题栏 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="title">用户服务协议</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 协议内容 -->
+  <scroll-view class="content" scroll-y="true">
+    <view class="agreement-content">
+      <!-- 标题 -->
+      <view class="section-title main-title">
+        实佣有你平台用户服务协议
+      </view>
+      
+      <view class="update-time">更新日期：2026年4月4日</view>
+      <view class="update-time">生效日期：2026年4月4日</view>
+
+      <!-- 提示 -->
+      <view class="important-notice">
+        <text class="notice-icon">⚠️</text>
+        <text class="notice-text">请您仔细阅读本协议，特别是免除或限制责任的条款、法律适用和争议解决条款。您使用本平台服务即表示您已阅读并同意本协议的全部内容。</text>
+      </view>
+
+      <!-- 第一条 -->
+      <view class="section">
+        <view class="section-title">一、协议范围与定义</view>
+        <view class="section-content">
+          <text class="paragraph">1.1 本协议是您（以下简称"用户"）与实佣有你平台（以下简称"本平台"）之间关于使用本平台提供的商品推广、佣金结算等服务所订立的协议。</text>
+          
+          <text class="paragraph">1.2 "本平台"指由本公司运营的"实佣有你"微信小程序及相关服务平台。</text>
+          
+          <text class="paragraph">1.3 "用户"包括但不限于普通用户和代理用户，代理用户是指通过本平台申请并获得批准，有权推广商品并获取佣金的用户。</text>
+          
+          <text class="paragraph">1.4 "联盟平台"指本平台对接的第三方电商推广联盟，包括但不限于淘宝联盟、京东联盟、拼多多联盟、抖音联盟等。</text>
+        </view>
+      </view>
+
+      <!-- 第二条 -->
+      <view class="section">
+        <view class="section-title">二、账号注册与使用</view>
+        <view class="section-content">
+          <text class="paragraph">2.1 用户使用本平台服务需通过微信授权登录，您应确保提供的信息真实、准确、完整。</text>
+          
+          <text class="paragraph">2.2 您理解并同意，一个微信账号仅能注册一个本平台账号。如发现恶意注册多个账号的行为，本平台有权封禁相关账号。</text>
+          
+          <text class="paragraph">2.3 您应妥善保管账号信息，对该账号下的所有活动和事件负责。如发现账号被盗用，应立即通知本平台。</text>
+          
+          <text class="paragraph">2.4 未经本平台书面同意，您不得转让、出售或出借账号给他人使用。</text>
+        </view>
+      </view>
+
+      <!-- 第三条 -->
+      <view class="section">
+        <view class="section-title">三、服务内容</view>
+        <view class="section-content">
+          <text class="paragraph">3.1 本平台为用户提供商品浏览、搜索、推广链接生成等服务。</text>
+          
+          <text class="paragraph">3.2 代理用户可通过本平台：</text>
+          <text class="sub-item">• 获取商品推广链接和推广素材</text>
+          <text class="sub-item">• 查看推广数据和佣金收益</text>
+          <text class="sub-item">• 申请佣金提现</text>
+          <text class="sub-item">• 发展下级代理（如开通该功能）</text>
+          
+          <text class="paragraph">3.3 本平台保留随时调整、暂停或终止部分或全部服务的权利，无需事先通知用户。</text>
+        </view>
+      </view>
+
+      <!-- 第四条 -->
+      <view class="section">
+        <view class="section-title">四、代理申请与管理</view>
+        <view class="section-content">
+          <text class="paragraph">4.1 用户可通过本平台申请成为代理用户，需满足本平台规定的条件并经审核通过。</text>
+          
+          <text class="paragraph">4.2 代理用户需绑定合法有效的联盟平台账号，并确保账号信息准确。</text>
+          
+          <text class="paragraph">4.3 代理用户应遵守联盟平台的相关规则，不得从事违规推广活动，包括但不限于：</text>
+          <text class="sub-item">• 虚假交易、刷单刷量</text>
+          <text class="sub-item">• 恶意推广、强制推广</text>
+          <text class="sub-item">• 侵犯他人知识产权</text>
+          <text class="sub-item">• 发布违法违规内容</text>
+          
+          <text class="paragraph">4.4 如发现违规行为，本平台有权暂停或终止代理资格，并扣除违规所得佣金。</text>
+        </view>
+      </view>
+
+      <!-- 第五条 -->
+      <view class="section">
+        <view class="section-title">五、佣金结算与提现</view>
+        <view class="section-content">
+          <text class="paragraph">5.1 代理用户通过推广商品成交后，可按照本平台规则获得相应佣金。具体佣金比例以联盟平台实际结算为准。</text>
+          
+          <text class="paragraph">5.2 佣金结算周期：</text>
+          <text class="sub-item">• 订单确认收货后进入结算周期</text>
+          <text class="sub-item">• 淘宝联盟订单：次月20日左右结算</text>
+          <text class="sub-item">• 京东联盟订单：次月中旬结算</text>
+          <text class="sub-item">• 其他联盟平台按其规则执行</text>
+          
+          <text class="paragraph">5.3 提现规则：</text>
+          <text class="sub-item">• 最低提现金额：10元</text>
+          <text class="sub-item">• 提现手续费：根据提现金额收取，具体费率以平台公示为准</text>
+          <text class="sub-item">• 提现到账时间：1-3个工作日</text>
+          
+          <text class="paragraph">5.4 如因用户违规导致订单退款或联盟平台扣款，本平台有权从用户账户余额中扣除相应金额。</text>
+        </view>
+      </view>
+
+      <!-- 第六条 -->
+      <view class="section">
+        <view class="section-title">六、用户权利与义务</view>
+        <view class="section-content">
+          <text class="paragraph strong">6.1 用户权利：</text>
+          <text class="sub-item">• 依法使用本平台各项服务</text>
+          <text class="sub-item">• 查看个人账户信息和交易记录</text>
+          <text class="sub-item">• 获得本平台的技术支持和客户服务</text>
+          <text class="sub-item">• 监督本平台服务质量并提出意见建议</text>
+          
+          <text class="paragraph strong">6.2 用户义务：</text>
+          <text class="sub-item">• 遵守国家法律法规及本协议约定</text>
+          <text class="sub-item">• 不得利用本平台从事违法违规活动</text>
+          <text class="sub-item">• 保护自己和他人的隐私信息</text>
+          <text class="sub-item">• 不得干扰本平台正常运营</text>
+          <text class="sub-item">• 配合本平台进行身份认证和审核</text>
+        </view>
+      </view>
+
+      <!-- 第七条 -->
+      <view class="section">
+        <view class="section-title">七、知识产权</view>
+        <view class="section-content">
+          <text class="paragraph">7.1 本平台的所有内容，包括但不限于文字、图片、音频、视频、软件、程序、版面设计等，均属本平台或相关权利人所有。</text>
+          
+          <text class="paragraph">7.2 未经本平台或相关权利人书面许可，任何人不得擅自使用、复制、修改、传播本平台的任何内容。</text>
+          
+          <text class="paragraph">7.3 用户在使用本平台服务时发布的内容，应确保拥有合法权利，不得侵犯他人知识产权。</text>
+        </view>
+      </view>
+
+      <!-- 第八条 -->
+      <view class="section">
+        <view class="section-title">八、隐私保护</view>
+        <view class="section-content">
+          <text class="paragraph">8.1 本平台重视用户隐私保护，具体内容请查阅《隐私政策》。</text>
+          
+          <text class="paragraph">8.2 您使用本平台服务即表示同意本平台按照《隐私政策》收集、使用和保护您的个人信息。</text>
+        </view>
+      </view>
+
+      <!-- 第九条 -->
+      <view class="section">
+        <view class="section-title">九、免责声明</view>
+        <view class="section-content">
+          <text class="paragraph">9.1 本平台仅提供信息发布和推广工具，商品质量、售后服务等由商家负责，本平台不承担相关责任。</text>
+          
+          <text class="paragraph">9.2 因以下情形导致服务中断或数据丢失，本平台不承担责任：</text>
+          <text class="sub-item">• 不可抗力因素（自然灾害、战争等）</text>
+          <text class="sub-item">• 政府行为或法律法规调整</text>
+          <text class="sub-item">• 网络故障、黑客攻击、病毒侵害</text>
+          <text class="sub-item">• 用户操作不当或设备故障</text>
+          <text class="sub-item">• 第三方服务中断（联盟平台、支付平台等）</text>
+          
+          <text class="paragraph">9.3 用户因使用本平台服务产生的任何直接、间接、附带或衍生损失，本平台不承担责任。</text>
+        </view>
+      </view>
+
+      <!-- 第十条 -->
+      <view class="section">
+        <view class="section-title">十、违约责任</view>
+        <view class="section-content">
+          <text class="paragraph">10.1 用户违反本协议约定，本平台有权采取以下措施：</text>
+          <text class="sub-item">• 警告、限制功能使用</text>
+          <text class="sub-item">• 暂停或终止提供服务</text>
+          <text class="sub-item">• 冻结或扣除账户余额</text>
+          <text class="sub-item">• 注销账号</text>
+          <text class="sub-item">• 追究法律责任</text>
+          
+          <text class="paragraph">10.2 因用户违约给本平台造成损失的，用户应承担赔偿责任。</text>
+        </view>
+      </view>
+
+      <!-- 第十一条 -->
+      <view class="section">
+        <view class="section-title">十一、协议变更</view>
+        <view class="section-content">
+          <text class="paragraph">11.1 本平台有权根据业务发展需要修改本协议，修改后的协议将在本平台公示。</text>
+          
+          <text class="paragraph">11.2 如您不同意修改后的协议，可停止使用本平台服务；继续使用则视为接受修改后的协议。</text>
+        </view>
+      </view>
+
+      <!-- 第十二条 -->
+      <view class="section">
+        <view class="section-title">十二、争议解决</view>
+        <view class="section-content">
+          <text class="paragraph">12.1 本协议的订立、执行、解释及争议解决均适用中华人民共和国法律。</text>
+          
+          <text class="paragraph">12.2 如就本协议内容或执行发生争议，双方应友好协商解决；协商不成的，任何一方可向本平台所在地人民法院提起诉讼。</text>
+        </view>
+      </view>
+
+      <!-- 第十三条 -->
+      <view class="section">
+        <view class="section-title">十三、其他条款</view>
+        <view class="section-content">
+          <text class="paragraph">13.1 本协议部分条款被认定为无效或不可执行的，不影响其他条款的效力。</text>
+          
+          <text class="paragraph">13.2 本协议未尽事宜，按照国家相关法律法规执行。</text>
+          
+          <text class="paragraph">13.3 如有疑问或建议，请通过本平台客服联系我们。</text>
+        </view>
+      </view>
+
+      <!-- 联系方式 -->
+      <view class="contact-section">
+        <view class="contact-title">联系我们</view>
+        <text class="contact-item">平台名称：实佣有你</text>
+        <text class="contact-item">客服邮箱：support@example.com</text>
+        <text class="contact-item">客服时间：工作日 9:00-18:00</text>
+      </view>
+
+      <!-- 底部提示 -->
+      <view class="bottom-tip">
+        感谢您使用实佣有你平台！
+      </view>
+    </view>
+  </scroll-view>
+</view>

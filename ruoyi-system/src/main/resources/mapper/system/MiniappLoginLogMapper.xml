@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MiniappLoginLogMapper">
+    
+    <resultMap type="MiniappLoginLog" id="MiniappLoginLogResult">
+        <id     property="logId"           column="log_id"          />
+        <result property="userId"          column="user_id"         />
+        <result property="openId"          column="open_id"         />
+        <result property="loginTime"       column="login_time"      />
+        <result property="loginIp"         column="login_ip"        />
+        <result property="loginLocation"   column="login_location"  />
+        <result property="browser"         column="browser"         />
+        <result property="os"              column="os"              />
+        <result property="deviceType"      column="device_type"     />
+        <result property="deviceModel"     column="device_model"    />
+        <result property="status"          column="status"          />
+        <result property="msg"             column="msg"             />
+    </resultMap>
+
+    <sql id="selectMiniappLoginLogVo">
+        select log_id, user_id, open_id, login_time, login_ip, login_location,
+               browser, os, device_type, device_model, status, msg
+        from sys_miniapp_login_log
+    </sql>
+
+    <select id="selectMiniappLoginLogById" parameterType="Long" resultMap="MiniappLoginLogResult">
+        <include refid="selectMiniappLoginLogVo"/>
+        where log_id = #{logId}
+    </select>
+
+    <select id="selectMiniappLoginLogList" parameterType="MiniappLoginLog" resultMap="MiniappLoginLogResult">
+        <include refid="selectMiniappLoginLogVo"/>
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="openId != null and openId != ''">
+                and open_id = #{openId}
+            </if>
+            <if test="loginIp != null and loginIp != ''">
+                and login_ip like concat('%', #{loginIp}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="params.beginTime != null and params.beginTime != ''">
+                and date_format(login_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''">
+                and date_format(login_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+        order by login_time desc
+    </select>
+
+    <select id="selectMiniappLoginLogByUserId" parameterType="Long" resultMap="MiniappLoginLogResult">
+        <include refid="selectMiniappLoginLogVo"/>
+        where user_id = #{userId}
+        order by login_time desc
+    </select>
+
+    <select id="selectMiniappLoginLogByOpenId" parameterType="String" resultMap="MiniappLoginLogResult">
+        <include refid="selectMiniappLoginLogVo"/>
+        where open_id = #{openId}
+        order by login_time desc
+    </select>
+
+    <insert id="insertMiniappLoginLog" parameterType="MiniappLoginLog" useGeneratedKeys="true" keyProperty="logId">
+        insert into sys_miniapp_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="openId != null and openId != ''">open_id,</if>
+            <if test="loginTime != null">login_time,</if>
+            <if test="loginIp != null and loginIp != ''">login_ip,</if>
+            <if test="loginLocation != null and loginLocation != ''">login_location,</if>
+            <if test="browser != null and browser != ''">browser,</if>
+            <if test="os != null and os != ''">os,</if>
+            <if test="deviceType != null and deviceType != ''">device_type,</if>
+            <if test="deviceModel != null and deviceModel != ''">device_model,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="msg != null and msg != ''">msg,</if>
+         </trim>
+         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="openId != null and openId != ''">#{openId},</if>
+            <if test="loginTime != null">#{loginTime},</if>
+            <if test="loginIp != null and loginIp != ''">#{loginIp},</if>
+            <if test="loginLocation != null and loginLocation != ''">#{loginLocation},</if>
+            <if test="browser != null and browser != ''">#{browser},</if>
+            <if test="os != null and os != ''">#{os},</if>
+            <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
+            <if test="deviceModel != null and deviceModel != ''">#{deviceModel},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="msg != null and msg != ''">#{msg},</if>
+         </trim>
+    </insert>
+
+    <delete id="deleteMiniappLoginLogById" parameterType="Long">
+        delete from sys_miniapp_login_log where log_id = #{logId}
+    </delete>
+
+    <delete id="deleteMiniappLoginLogByIds" parameterType="Long">
+        delete from sys_miniapp_login_log where log_id in 
+        <foreach item="logId" collection="array" open="(" separator="," close=")">
+            #{logId}
+        </foreach>
+    </delete>
+
+    <delete id="cleanMiniappLoginLog">
+        truncate table sys_miniapp_login_log
+    </delete>
+
+</mapper>

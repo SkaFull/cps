@@ -1,0 +1,239 @@
+<!--pages/goods/detail/detail.wxml-->
+<view class="detail-container" wx:if="{{!loading && goods}}">
+  <!-- 商品图片轮播 -->
+  <swiper 
+    class="goods-swiper" 
+    indicator-dots 
+    indicator-color="rgba(255, 255, 255, 0.5)"
+    indicator-active-color="#ff4444"
+    circular
+    bindchange="onSwiperChange"
+    bindtap="onImagePreview">
+    <swiper-item wx:for="{{goods.images}}" wx:key="index">
+      <image class="swiper-image" src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 商品信息 -->
+  <view class="goods-info-section">
+    <!-- 价格 -->
+    <view class="price-section">
+      <view class="price-main">
+        <text class="price-symbol">¥</text>
+        <text class="price-value">{{goods.actualPrice}}</text>
+        <view class="price-original" wx:if="{{goods.originalPrice && goods.originalPrice != goods.actualPrice}}">
+          <text class="original-value">¥{{goods.originalPrice}}</text>
+        </view>
+      </view>
+      <view class="sales-info" wx:if="{{goods.monthSales}}">
+        <text class="sales-label">月销</text>
+        <text class="sales-value">{{goods.monthSales}}</text>
+      </view>
+    </view>
+
+    <!-- 促销标签 -->
+    <view class="promotion-tags" wx:if="{{goods.promotionTags && goods.promotionTags.length > 0}}">
+      <text class="commission-label">促销标签：</text>
+      <view class="tag-item" wx:for="{{goods.promotionTags}}" wx:key="index">
+        <text class="tag-text">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 预估佣金（仅代理可见） isAgent &&  -->
+    <view class="commission-section" wx:if="{{goods.commission && goods.commission != '0'}}">
+      <view class="commission-icon">💰</view>
+      <text class="commission-label">预估佣金：</text>
+      <text class="commission-value">¥{{goods.commission}}</text>
+    </view>
+
+    <!-- 天猫活动信息 -->
+    <view class="tmall-activity" wx:if="{{goods.tmallActivityInfo}}">
+      <view class="activity-icon">🎉</view>
+      <text class="activity-text">{{goods.tmallActivityInfo}}</text>
+    </view>
+
+    <!-- 标题 -->
+    <view class="goods-title">{{goods.title}}</view>
+
+    <!-- 短标题 -->
+    <view class="goods-short-title" wx:if="{{goods.shortTitle && goods.shortTitle != goods.title}}">
+      <text class="short-title-tag">精选</text>
+      <text class="short-title-text">{{goods.shortTitle}}</text>
+    </view>
+
+    <!-- 类目信息 -->
+    <view class="goods-category" wx:if="{{goods.categoryName}}">
+      <text class="category-icon">🏷️</text>
+      <text class="category-name">{{goods.categoryName}}</text>
+    </view>
+  </view>
+
+  <!-- 店铺信息 -->
+  <view class="shop-section">
+    <view class="shop-header">
+      <view class="shop-info">
+        <text class="shop-icon">🏪</text>
+        <view class="shop-details">
+          <text class="shop-name">{{goods.shopTitle || goods.nick}}</text>
+          <text class="shop-location" wx:if="{{goods.provcity}}">{{goods.provcity}}</text>
+        </view>
+      </view>
+      <view class="shop-action" bindtap="onEnterShop">
+        <text class="action-text">进店</text>
+        <text class="action-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品详情图 -->
+  <view class="detail-section">
+    <view class="section-title">
+      <text class="title-text">商品详情</text>
+      <view class="title-line"></view>
+    </view>
+
+    <!-- 商品基本信息 -->
+    <view class="detail-info">
+      <view class="info-row">
+        <text class="info-label">商品ID</text>
+        <text class="info-value">{{goods.numIid}}</text>
+      </view>
+      <view class="info-row" wx:if="{{goods.brandName}}">
+        <text class="info-label">品牌</text>
+        <text class="info-value">{{goods.brandName}}</text>
+      </view>
+      <view class="info-row" wx:if="{{goods.provcity}}">
+        <text class="info-label">发货地</text>
+        <text class="info-value">{{goods.provcity}}</text>
+      </view>
+      <view class="info-row" wx:if="{{goods.categoryName}}">
+        <text class="info-label">商品类目</text>
+        <text class="info-value">{{goods.categoryName}}</text>
+      </view>
+    </view>
+    
+    <!-- 商品视频（如果有） -->
+    <view class="detail-videos" wx:if="{{goods.videos && goods.videos.length > 0}}">
+      <view class="video-item" wx:for="{{goods.videos}}" wx:key="index">
+        <video 
+          class="goods-video"
+          src="{{item.url}}"
+          poster="{{item.cover}}"
+          controls
+          object-fit="contain"
+          show-center-play-btn
+          enable-play-gesture
+        ></video>
+      </view>
+    </view>
+    
+    <!-- 商品属性信息（京东特有） -->
+    <view class="detail-props" wx:if="{{goods.propGroups && goods.propGroups.length > 0}}">
+      <view class="prop-group" wx:for="{{goods.propGroups}}" wx:key="groupId" wx:for-item="group">
+        <view class="prop-group-name">{{group.groupName}}</view>
+        <view class="prop-list">
+          <view class="prop-item" wx:for="{{group.atts}}" wx:key="attId" wx:for-item="att">
+            <text class="prop-name">{{att.attName}}：</text>
+            <text class="prop-value">{{att.vals[0]}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 商品详情图片列表 -->
+    <view class="detail-images" wx:if="{{goods.detailImages && goods.detailImages.length > 0}}">
+      <image 
+        class="detail-image" 
+        wx:for="{{goods.detailImages}}" 
+        wx:key="index"
+        src="{{item}}" 
+        mode="widthFix"
+        lazy-load
+      ></image>
+    </view>
+    
+    <!-- 如果有白底图，优先展示 -->
+    <view class="detail-images" wx:if="{{goods.whiteImage}}">
+      <image class="detail-image" src="{{goods.whiteImage}}" mode="widthFix"></image>
+    </view>
+    
+    
+
+    <!-- 温馨提示 -->
+    <view class="detail-tips">
+      <view class="tips-title">
+        <text class="tips-icon">💡</text>
+        <text class="tips-text">购买说明</text>
+      </view>
+      <view class="tips-content">
+        <text class="tips-item">• 点击"获取{{currentPlatform === 'jd' ? '京链接' : currentPlatform === 'pdd' ? '拼链接' : '淘口令'}}"生成专属购买链接</text>
+        <text class="tips-item">• {{currentPlatform === 'jd' ? '京链接' : currentPlatform === 'pdd' ? '拼链接' : '淘口令'}}会自动复制到剪贴板</text>
+        <text class="tips-item">• 打开{{currentPlatform === 'jd' ? '京东' : currentPlatform === 'pdd' ? '拼多多' : '手机淘宝'}}APP即可自动识别购买</text>
+        <text class="tips-item" wx:if="{{isAgent}}">• 作为代理，您购买后可获得佣金返利</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部占位，避免被底部栏遮挡 -->
+  <view class="bottom-placeholder"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bar-left">
+      <button class="icon-btn share-btn" open-type="share">
+        <text class="btn-icon">📤</text>
+        <text class="btn-text">分享</text>
+      </button>
+    </view>
+    <view class="bar-right">
+      <button class="action-btn buy-btn" bindtap="onGetTpwd">
+        <text class="btn-text">获取{{currentPlatform === 'jd' ? '京链接' : currentPlatform === 'pdd' ? '拼链接' : '淘口令'}}</text>
+      </button>
+    </view>
+  </view>
+</view>
+
+<!-- 加载状态 -->
+<view class="loading-container" wx:if="{{loading}}">
+  <view class="loading-spinner">
+    <view class="spinner"></view>
+  </view>
+  <text class="loading-text">正在加载商品详情...</text>
+</view>
+
+<!-- 空状态 -->
+<view class="empty-container" wx:if="{{!loading && !goods}}">
+  <view class="empty-icon">📦</view>
+  <text class="empty-text">商品不存在或已下架</text>
+  <button class="empty-btn" bindtap="goBack">返回首页</button>
+</view>
+
+<!-- 淘口令/京链接/拼链接弹窗 -->
+<view class="tpwd-modal" wx:if="{{showTpwdModal}}" bindtap="onCloseTpwdModal">
+  <view class="tpwd-content" catchtap="stopPropagation">
+    <view class="tpwd-header">
+      <text class="tpwd-title">{{tpwdType === 'jd' ? '京链接已生成' : tpwdType === 'pdd' ? '拼链接已生成' : '淘口令已生成'}}</text>
+      <view class="tpwd-close" bindtap="onCloseTpwdModal">✕</view>
+    </view>
+    
+    <view class="tpwd-body">
+      <view class="tpwd-code-wrapper">
+        <scroll-view class="tpwd-code-scroll" scroll-y>
+          <text class="tpwd-code-text">{{currentTpwd}}</text>
+        </scroll-view>
+      </view>
+      <view class="tpwd-tip">
+        <text class="tip-icon">💡</text>
+        <text class="tip-text">{{tpwdType === 'jd' ? '链接已自动复制，打开京东APP即可购买' : tpwdType === 'pdd' ? '链接已自动复制，打开拼多多APP即可购买' : '淘口令已自动复制，打开手机淘宝即可购买'}}</text>
+      </view>
+    </view>
+    
+    <view class="tpwd-footer">
+      <button class="tpwd-btn copy-btn" bindtap="onCopyTpwd">
+        <text class="btn-icon">📋</text>
+        <text>复制链接</text>
+      </button>
+      <button class="tpwd-btn confirm-btn" bindtap="onCloseTpwdModal">知道了</button>
+    </view>
+  </view>
+</view>

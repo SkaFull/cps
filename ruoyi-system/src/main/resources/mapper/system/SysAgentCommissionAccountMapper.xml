@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysAgentCommissionAccountMapper">
+    
+    <resultMap type="com.ruoyi.system.domain.SysAgentCommissionAccount" id="SysAgentCommissionAccountResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="totalEarned"    column="total_earned"    />
+        <result property="selfEarned"    column="self_earned"    />
+        <result property="promotionEarned"    column="promotion_earned"    />
+        <result property="balance"    column="balance"    />
+        <result property="withdrawn"    column="withdrawn"    />
+        <result property="frozenAmount"    column="frozen_amount"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysAgentCommissionAccountVo">
+        select id, user_id, total_earned, self_earned, promotion_earned, 
+               balance, withdrawn, frozen_amount, create_time, update_time
+        from sys_agent_commission_account
+    </sql>
+
+    <select id="selectSysAgentCommissionAccountList" parameterType="com.ruoyi.system.domain.SysAgentCommissionAccount" resultMap="SysAgentCommissionAccountResult">
+        <include refid="selectSysAgentCommissionAccountVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectSysAgentCommissionAccountById" parameterType="Long" resultMap="SysAgentCommissionAccountResult">
+        <include refid="selectSysAgentCommissionAccountVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSysAgentCommissionAccountByUserId" parameterType="Long" resultMap="SysAgentCommissionAccountResult">
+        <include refid="selectSysAgentCommissionAccountVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByUserId" parameterType="Long" resultMap="SysAgentCommissionAccountResult">
+        <include refid="selectSysAgentCommissionAccountVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertSysAgentCommissionAccount" parameterType="com.ruoyi.system.domain.SysAgentCommissionAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_agent_commission_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="totalEarned != null">total_earned,</if>
+            <if test="selfEarned != null">self_earned,</if>
+            <if test="promotionEarned != null">promotion_earned,</if>
+            <if test="balance != null">balance,</if>
+            <if test="withdrawn != null">withdrawn,</if>
+            <if test="frozenAmount != null">frozen_amount,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="totalEarned != null">#{totalEarned},</if>
+            <if test="selfEarned != null">#{selfEarned},</if>
+            <if test="promotionEarned != null">#{promotionEarned},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="withdrawn != null">#{withdrawn},</if>
+            <if test="frozenAmount != null">#{frozenAmount},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysAgentCommissionAccount" parameterType="com.ruoyi.system.domain.SysAgentCommissionAccount">
+        update sys_agent_commission_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="totalEarned != null">total_earned = #{totalEarned},</if>
+            <if test="selfEarned != null">self_earned = #{selfEarned},</if>
+            <if test="promotionEarned != null">promotion_earned = #{promotionEarned},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="withdrawn != null">withdrawn = #{withdrawn},</if>
+            <if test="frozenAmount != null">frozen_amount = #{frozenAmount},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysAgentCommissionAccountById" parameterType="Long">
+        delete from sys_agent_commission_account where id = #{id}
+    </delete>
+
+    <delete id="deleteSysAgentCommissionAccountByIds" parameterType="String">
+        delete from sys_agent_commission_account where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

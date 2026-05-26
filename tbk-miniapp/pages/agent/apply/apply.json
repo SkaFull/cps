@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "代理申请",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "custom-toast": "/components/custom-toast/custom-toast"
+  }
+}

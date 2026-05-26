@@ -1,0 +1,338 @@
+<!--pages/agent/apply/apply.wxml-->
+<view class="apply-container">
+  <!-- 申请表单 - 未申请时显示 -->
+  <view class="form-section" wx:if="{{!hasApplied}}">
+    <!-- 表单头部 -->
+    <view class="form-header">
+      <view class="header-icon">🎯</view>
+      <text class="header-title">申请成为代理</text>
+      <text class="header-desc">填写以下信息，审核通过后即可开始推广赚取佣金</text>
+    </view>
+
+    <!-- 表单主体 -->
+    <view class="form-body">
+      <!-- 基本信息 -->
+      <view class="section-title">
+        <view class="title-line"></view>
+        <text class="title-text">基本信息</text>
+        <view class="title-line"></view>
+      </view>
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">真实姓名</text>
+          <text class="label-required">*</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="text" 
+          placeholder="请输入真实姓名"
+          value="{{formData.realName}}"
+          data-field="realName"
+          bindinput="onInput"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">手机号</text>
+          <text class="label-required">*</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="number" 
+          placeholder="请输入11位手机号"
+          value="{{formData.phone}}"
+          data-field="phone"
+          bindinput="onInput"
+          maxlength="11"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">微信号</text>
+          <text class="label-required">*</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="text" 
+          placeholder="请输入微信号"
+          value="{{formData.wechat}}"
+          data-field="wechat"
+          bindinput="onInput"
+        />
+        <view class="item-tip">用于后续联系和沟通</view>
+      </view>
+
+      <!-- 淘宝客信息 -->
+      <!-- view class="section-title">
+        <view class="title-line"></view>
+        <text class="title-text">淘宝客信息</text>
+        <view class="title-line"></view>
+      </view>
+
+      <view class="info-tip">
+        <view class="tip-icon">💡</view>
+        <view class="tip-content">
+          <text class="tip-title">如何获取淘宝客信息？</text>
+          <text class="tip-text">1. 登录淘宝联盟官网 (https://pub.alimama.com)</text>
+          <text class="tip-text">2. 进入"推广管理" → "推广位管理"获取推广位ID</text>
+          <text class="tip-text">3. 进入"账户" → "权限管理"获取AppKey和AppSecret</text>
+        </view>
+      </view -->
+
+      <!-- 注释掉AppKey和AppSecret输入框，后端将使用默认值 -->
+      <!-- <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">AppKey</text>
+          <text class="label-required">*</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="text" 
+          placeholder="请输入淘宝客AppKey"
+          value="{{formData.appKey}}"
+          data-field="appKey"
+          bindinput="onInput"
+        />
+        <view class="item-tip">淘宝联盟后台获取</view>
+      </view> -->
+
+      <!-- <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">AppSecret</text>
+          <text class="label-required">*</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="text" 
+          placeholder="请输入淘宝客AppSecret"
+          value="{{formData.appSecret}}"
+          data-field="appSecret"
+          bindinput="onInput"
+          password="{{!showSecret}}"
+        />
+        <view class="toggle-secret" bindtap="toggleSecret">
+          <text>{{showSecret ? '隐藏' : '显示'}}</text>
+        </view>
+      </view> -->
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">联盟类型</text>
+          <text class="label-required">*</text>
+        </view>
+        <view class="platform-checkbox-list">
+          <view 
+            wx:for="{{platformTypeOptions}}" 
+            wx:key="value" 
+            class="checkbox-item"
+            data-value="{{item.value}}"
+            bindtap="onPlatformTypeToggle"
+          >
+            <view class="checkbox {{item.checked ? 'checked' : ''}}">
+              <text class="checkbox-icon" wx:if="{{item.checked}}">✓</text>
+            </view>
+            <text class="checkbox-label">{{item.label}}</text>
+          </view>
+        </view>
+        <view class="item-tip">可选择多个联盟类型，共用同一个邀请码</view>
+      </view>
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">上级邀请码</text>
+          <text class="label-optional">（选填）</text>
+        </view>
+        <input 
+          class="item-input" 
+          type="text" 
+          placeholder="请输入上级的邀请码（选填）"
+          value="{{formData.referrerInvitationCode}}"
+          data-field="referrerInvitationCode"
+          bindinput="onInput"
+          maxlength="20"
+        />
+        <view class="item-tip">填写推荐人的邀请码，建立上下级关系</view>
+      </view>
+
+      <!-- 备注信息 -->
+      <view class="section-title">
+        <view class="title-line"></view>
+        <text class="title-text">补充说明</text>
+        <view class="title-line"></view>
+      </view>
+
+      <view class="form-item">
+        <view class="item-label">
+          <text class="label-text">备注说明</text>
+          <text class="label-optional">（选填）</text>
+        </view>
+        <textarea 
+          class="item-textarea" 
+          placeholder="请简单介绍您的推广渠道和资源优势"
+          value="{{formData.remark}}"
+          data-field="remark"
+          bindinput="onInput"
+          maxlength="200"
+        />
+        <view class="textarea-counter">{{formData.remark.length}}/200</view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="form-footer">
+      <button 
+        class="submit-btn" 
+        loading="{{loading}}"
+        disabled="{{loading}}"
+        bindtap="onSubmit">
+        <text wx:if="{{!loading}}">提交申请</text>
+        <text wx:else>提交中...</text>
+      </button>
+      <view class="footer-tip">提交后我们将在1-3个工作日内完成审核</view>
+    </view>
+  </view>
+
+  <!-- 申请状态 - 已申请时显示 -->
+  <view class="status-section" wx:if="{{hasApplied}}">
+    <!-- 待审核 -->
+    <view class="status-card status-pending" wx:if="{{applyStatus === 'pending'}}">
+      <view class="status-header">
+        <view class="status-icon">⏳</view>
+        <view class="status-info">
+          <text class="status-title">申请审核中</text>
+          <text class="status-desc">我们将在1-3个工作日内完成审核</text>
+        </view>
+      </view>
+      
+      <view class="info-card">
+        <view class="card-title">申请信息</view>
+        <view class="info-item">
+          <text class="info-label">真实姓名</text>
+          <text class="info-value">{{applyInfo.realName}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">手机号</text>
+          <text class="info-value">{{applyInfo.phone}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">微信号</text>
+          <text class="info-value">{{applyInfo.wechat}}</text>
+        </view>
+        <!-- 注释掉AppKey显示 -->
+        <!-- <view class="info-item">
+          <text class="info-label">AppKey</text>
+          <text class="info-value">{{applyInfo.appKey}}</text>
+        </view> -->
+        <view class="info-item">
+          <text class="info-label">联盟类型</text>
+          <text class="info-value">{{applyInfo.platformTypeLabel || applyInfo.applyPlatformTypes}}</text>
+        </view>
+        <view class="info-item" wx:if="{{applyInfo.remark}}">
+          <text class="info-label">备注说明</text>
+          <text class="info-value">{{applyInfo.remark}}</text>
+        </view>
+      </view>
+
+      <view class="tips-card">
+        <view class="tips-icon">ℹ️</view>
+        <text class="tips-text">审核通过后，系统将为您生成专属邀请码</text>
+      </view>
+    </view>
+
+    <!-- 已通过 -->
+    <view class="status-card status-approved" wx:if="{{applyStatus === 'approved'}}">
+      <view class="status-header">
+        <view class="status-icon">✅</view>
+        <view class="status-info">
+          <text class="status-title">恭喜！您已成为代理</text>
+          <text class="status-desc">快去分享商品赚取佣金吧</text>
+        </view>
+      </view>
+      
+      <view class="invitation-card">
+        <view class="card-header">
+          <view class="card-icon">🎁</view>
+          <text class="card-title">我的邀请码</text>
+        </view>
+        <view class="invitation-code-wrapper">
+          <text class="invitation-code">{{applyInfo.invitationCode}}</text>
+          <button class="copy-btn" bindtap="onCopyInvitationCode">
+            <text class="copy-icon">📋</text>
+            <text>复制</text>
+          </button>
+        </view>
+        <view class="card-tips">
+          <text class="tips-icon">💡</text>
+          <text>分享商品时会自动携带您的邀请码</text>
+        </view>
+      </view>
+
+      <view class="agent-info-card">
+        <view class="card-title">代理信息</view>
+        <view class="info-item">
+          <text class="info-label">真实姓名</text>
+          <text class="info-value">{{applyInfo.realName}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">手机号</text>
+          <text class="info-value">{{applyInfo.phone}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">联盟类型</text>
+          <text class="info-value">{{applyInfo.platformTypeLabel || applyInfo.applyPlatformTypes}}</text>
+        </view>
+      </view>
+
+      <button class="share-btn" open-type="share">
+        <text class="share-icon">📱</text>
+        <text>分享给好友</text>
+      </button>
+    </view>
+
+    <!-- 已拒绝 -->
+    <view class="status-card status-rejected" wx:if="{{applyStatus === 'rejected'}}">
+      <view class="status-header">
+        <view class="status-icon">❌</view>
+        <view class="status-info">
+          <text class="status-title">申请未通过</text>
+          <text class="status-desc">请查看驳回原因并重新申请</text>
+        </view>
+      </view>
+      
+      <!-- 驳回原因卡片 -->
+      <view class="reject-card">
+        <view class="reject-label">
+          <text class="reject-icon">📝</text>
+          <text>驳回原因</text>
+        </view>
+        <text class="reject-content" wx:if="{{applyInfo.auditRemark}}">{{applyInfo.auditRemark}}</text>
+        <text class="reject-content reject-empty" wx:else>暂无驳回说明，请联系客服了解详情</text>
+      </view>
+
+      <view class="tips-card">
+        <view class="tips-icon">💡</view>
+        <text class="tips-text">请根据驳回原因修改信息后重新提交申请</text>
+      </view>
+
+      <!-- 重新申请按钮（左右上下居中） -->
+      <view class="reapply-btn-wrapper">
+        <button class="reapply-btn" bindtap="onReapply">
+          <text>重新申请</text>
+        </button>
+    </view>
+  </view>
+</view>
+
+<!-- 自定义提示框 -->
+<custom-toast 
+  show="{{toastShow}}"
+  type="{{toastType}}"
+  title="{{toastTitle}}"
+  message="{{toastMessage}}"
+  duration="{{3500}}"
+  bind:close="onToastClose"
+/>
+</view>

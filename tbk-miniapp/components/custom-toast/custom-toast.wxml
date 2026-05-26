@@ -1,0 +1,23 @@
+<!-- 自定义提示框组件 -->
+<view class="custom-toast-mask {{show ? 'show' : ''}}" catchtouchmove="preventTouchMove">
+  <view class="custom-toast-container {{show ? 'show' : ''}}">
+    <!-- 图标区域 -->
+    <view class="toast-icon-wrap {{type}}">
+      <text wx:if="{{type === 'success'}}" class="toast-icon-text">✓</text>
+      <text wx:elif="{{type === 'error'}}" class="toast-icon-text">✕</text>
+      <text wx:elif="{{type === 'warning'}}" class="toast-icon-text">!</text>
+      <text wx:else class="toast-icon-text">i</text>
+    </view>
+    
+    <!-- 消息内容 -->
+    <view class="toast-content">
+      <text class="toast-title">{{title}}</text>
+      <text wx:if="{{message}}" class="toast-message">{{message}}</text>
+    </view>
+    
+    <!-- 关闭按钮 -->
+    <view wx:if="{{showClose}}" class="toast-close" bindtap="onClose">
+      <text class="close-icon">×</text>
+    </view>
+  </view>
+</view>

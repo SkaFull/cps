@@ -1,0 +1,168 @@
+<!--pages/about/index.wxml - 关于我们-->
+<view class="container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-section">
+    <view class="header-gradient"></view>
+    <view class="header-content">
+      <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+      <view class="app-name">全域CPS推广平台</view>
+      <view class="slogan">真实 · 透明 · 公平 · 共赢</view>
+    </view>
+  </view>
+
+  <!-- 主要内容区 -->
+  <view class="content-section">
+    <!-- 欢迎语 -->
+    <view class="welcome-card">
+      <view class="card-title">
+        <text class="title-icon">👋</text>
+        <text class="title-text">欢迎来到我们的平台</text>
+      </view>
+      <view class="welcome-text">
+        我们是一家专注于全域CPS推广分佣的合规平台，打破行业套路，以"真实、透明、公平、共赢"为核心，让每一位推广者都能拿到实实在在的收益。
+      </view>
+    </view>
+
+    <!-- 核心模式 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="header-line"></view>
+        <text class="section-title">我们的核心模式</text>
+      </view>
+      <view class="section-intro">
+        不同于传统返利平台的垫资套路、层级抽水，我们坚持「联盟实结、税后分佣、全员平等」的核心逻辑，全程透明可追溯，不画饼、不暗扣、不套路：
+      </view>
+      <view class="feature-list">
+        <view class="feature-item">
+          <view class="feature-number">01</view>
+          <view class="feature-content">
+            <view class="feature-title">真实订单为基</view>
+            <view class="feature-desc">用户推广成交后，以淘宝、京东、抖音、拼多多等上游电商联盟「最终有效结算订单」为准，退款、售后、虚假交易等无效订单，不计入分佣</view>
+          </view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-number">02</view>
+          <view class="feature-content">
+            <view class="feature-title">分佣透明固定</view>
+            <view class="feature-desc">联盟官方佣金结算至平台后，我们将税后40%的佣金，统一结算给推广用户，全员无等级、无升级、不用拉人头，新老用户同权，每一笔分佣都有据可查</view>
+          </view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-number">03</view>
+          <view class="feature-content">
+            <view class="feature-title">合规月结保障</view>
+            <view class="feature-desc">每月固定日期，汇总上月已完结、已到账的有效佣金，完成税务合规申报后，统一打款至用户账户，杜绝垫资风险，保障双方合法权益</view>
+          </view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-number">04</view>
+          <view class="feature-content">
+            <view class="feature-title">合规分层机制</view>
+            <view class="feature-desc">为鼓励推广者拓展优质伙伴，我们设置合规两级分层体系，严格坚守监管红线：每位代理最多可邀请10名下级推广者，下级不可再发展新的下级；上级代理可自动获得其直接邀请下级有效推广订单5%的额外分佣，该分佣从平台自留佣金中提取，不影响下级40%的固定分佣收益，全程透明可查、合规可控</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 核心优势 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="header-line"></view>
+        <text class="section-title">我们的核心优势</text>
+      </view>
+      <view class="section-intro">
+        在同质化严重的分佣赛道，我们不拼套路、不玩噱头，只靠实打实的利益和合规保障，打造差异化竞争力：
+      </view>
+      <view class="advantage-list">
+        <view class="advantage-item">
+          <view class="advantage-icon">💎</view>
+          <view class="advantage-content">
+            <view class="advantage-title">高佣无套路</view>
+            <view class="advantage-desc">全员统一40%税后分佣，不用升级、不用养团队，注册即享顶级收益，碾压市面多数平台普通用户及中等级别代理；新增合规两级分层，代理可邀请10名下级，上级享下级5%额外分佣（不影响下级收益），多推广多收益</view>
+          </view>
+        </view>
+        <view class="advantage-item">
+          <view class="advantage-icon">🛡️</view>
+          <view class="advantage-content">
+            <view class="advantage-title">合规更安心</view>
+            <view class="advantage-desc">不垫资、无资金池、不二清，每笔分佣绑定官方订单溯源，税后发放并提供正规流水凭证，适配微信及税务风控要求，长久稳定运营</view>
+          </view>
+        </view>
+        <view class="advantage-item">
+          <view class="advantage-icon">🔍</view>
+          <view class="advantage-content">
+            <view class="advantage-title">透明可追溯</view>
+            <view class="advantage-desc">用户可在个人中心实时查看每一笔推广订单的编号、联盟结算状态、可分佣金额，对账清晰，彻底打消"扣佣、拖欠"顾虑</view>
+          </view>
+        </view>
+        <view class="advantage-item">
+          <view class="advantage-icon">🌐</view>
+          <view class="advantage-content">
+            <view class="advantage-title">全域多渠道</view>
+            <view class="advantage-desc">覆盖淘宝、京东、抖音、拼多多、飞猪、亚马逊等全平台，推广品类无限制，用户随手推广就能赚佣金，收益上限拉满</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 我们的理念 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="header-line"></view>
+        <text class="section-title">我们的理念</text>
+      </view>
+      <view class="concept-content">
+        我们不追求短期暴利，不搞"薅羊毛"式引流，始终坚持「让利用户、长期共赢」的理念——让推广者不用费心套路，不用承担风险，只需专注推广，就能拿到稳定、可观的收益；让每一笔推广都有回报，每一份信任都不被辜负。
+      </view>
+    </view>
+
+    <!-- 我们的承诺 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="header-line"></view>
+        <text class="section-title">我们的承诺</text>
+      </view>
+      <view class="promise-list">
+        <view class="promise-item">
+          <view class="promise-badge">承诺一</view>
+          <view class="promise-text">永不设置隐形扣点、不随意下调分佣比例、不截留已到账佣金，40%税后分佣永久公开、统一执行；两级分层分佣规则透明，上级5%额外分佣从平台自留佣金中提取，不损害下级任何收益</view>
+        </view>
+        <view class="promise-item">
+          <view class="promise-badge">承诺二</view>
+          <view class="promise-text">严格拦截刷单、恶意撸佣等违规行为，保障平台环境纯净，守护每一位正规推广用户的权益</view>
+        </view>
+        <view class="promise-item">
+          <view class="promise-badge">承诺三</view>
+          <view class="promise-text">完善的客服体系，及时响应用户咨询、对账疑问，全程提供专业服务，让每一位用户都能踏实推广、安心赚钱</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 展望未来 -->
+    <view class="section-card future-card">
+      <view class="future-icon">🚀</view>
+      <view class="future-title">展望未来</view>
+      <view class="future-text">
+        我们将持续优化平台功能，拓展更多高佣渠道，坚守合规底线，与每一位推广者并肩同行，打造行业内最靠谱、最透明的分佣平台，让推广赚钱更简单、更安心！
+      </view>
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="contact-card">
+      <view class="contact-item">
+        <text class="contact-label">客服咨询：</text>
+        <text class="contact-value">小程序内客服入口</text>
+      </view>
+      <view class="contact-item">
+        <text class="contact-label">平台主体：</text>
+        <text class="contact-value">请填写你的平台主体信息</text>
+      </view>
+    </view>
+
+    <!-- 底部版权 -->
+    <view class="copyright">
+      <text class="copyright-text">© 2026 全域CPS推广平台</text>
+      <text class="copyright-text">诚信经营 · 合规运营</text>
+    </view>
+  </view>
+</view>

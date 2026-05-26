@@ -1,0 +1,408 @@
+/* pages/agreement/privacy-policy/privacy-policy.wxss */
+
+/* ==================== 基础容器 ==================== */
+page {
+  background: #f8f9fa;
+}
+
+.agreement-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== 顶部导航栏 ==================== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 30rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8rpx 32rpx rgba(102, 126, 234, 0.3);
+  backdrop-filter: blur(10rpx);
+}
+
+.back-btn {
+  width: 70rpx;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+}
+
+.back-btn:active {
+  transform: scale(0.92);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.back-icon {
+  font-size: 50rpx;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.placeholder {
+  width: 70rpx;
+}
+
+/* ==================== 内容区域 ==================== */
+.content {
+  flex: 1;
+  height: calc(100vh - 88rpx);
+}
+
+.agreement-content {
+  padding: 60rpx 35rpx 100rpx;
+}
+
+/* ==================== 主标题 ==================== */
+.main-title {
+  font-size: 48rpx !important;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 24rpx;
+  line-height: 1.4;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3rpx;
+  animation: fadeInDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  padding-bottom: 20rpx;
+}
+
+.main-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80rpx;
+  height: 6rpx;
+  background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+  border-radius: 3rpx;
+}
+
+/* ==================== 更新时间 ==================== */
+.update-time {
+  font-size: 24rpx;
+  color: #8e8e93;
+  text-align: center;
+  margin-bottom: 16rpx;
+  opacity: 0.85;
+  font-weight: 400;
+  letter-spacing: 1rpx;
+}
+
+/* ==================== 重要提示 ==================== */
+.important-notice {
+  margin: 50rpx 0;
+  padding: 40rpx 35rpx;
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0faff 100%);
+  border-radius: 24rpx;
+  border: 2rpx solid rgba(24, 144, 255, 0.2);
+  display: flex;
+  gap: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 144, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.important-notice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rpx;
+  height: 100%;
+  background: linear-gradient(180deg, #1890ff 0%, #096dd9 100%);
+}
+
+.important-notice::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.08) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.notice-icon {
+  font-size: 40rpx;
+  flex-shrink: 0;
+  line-height: 1.6;
+  z-index: 1;
+  filter: drop-shadow(0 2rpx 4rpx rgba(24, 144, 255, 0.3));
+}
+
+.notice-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #096dd9;
+  line-height: 1.9;
+  z-index: 1;
+  font-weight: 500;
+  letter-spacing: 0.5rpx;
+}
+
+/* ==================== 章节 ==================== */
+.section {
+  margin-bottom: 70rpx;
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 40rpx 35rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+  border: 1rpx solid rgba(102, 126, 234, 0.08);
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 35rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid rgba(102, 126, 234, 0.1);
+  position: relative;
+  letter-spacing: 2rpx;
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.section-title::before {
+  content: '';
+  width: 8rpx;
+  height: 36rpx;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  border-radius: 4rpx;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.4);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2rpx;
+  left: 0;
+  width: 120rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, transparent 100%);
+  border-radius: 2rpx;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+/* ==================== 段落 ==================== */
+.paragraph {
+  font-size: 30rpx;
+  color: #3a3a3c;
+  line-height: 2.1;
+  text-align: justify;
+  display: block;
+  text-indent: 2em;
+  letter-spacing: 1rpx;
+  font-weight: 400;
+}
+
+.paragraph.strong {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-top: 20rpx;
+  text-indent: 0;
+  padding: 20rpx 25rpx;
+  border-left: 5rpx solid #667eea;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, rgba(102, 126, 234, 0.02) 100%);
+  border-radius: 12rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.paragraph.strong::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80rpx;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05));
+}
+
+/* ==================== 子项列表 ==================== */
+.sub-item {
+  font-size: 28rpx;
+  color: #3a3a3c;
+  line-height: 2.1;
+  padding-left: 50rpx;
+  position: relative;
+  display: block;
+  margin-bottom: 16rpx;
+  letter-spacing: 0.5rpx;
+}
+
+.sub-item::before {
+  content: '';
+  position: absolute;
+  left: 18rpx;
+  top: 18rpx;
+  width: 12rpx;
+  height: 12rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.4);
+}
+
+.sub-item::after {
+  content: '';
+  position: absolute;
+  left: 21rpx;
+  top: 21rpx;
+  width: 6rpx;
+  height: 6rpx;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+/* ==================== 联系方式卡片 ==================== */
+.contact-section {
+  margin: 80rpx 0 50rpx;
+  padding: 60rpx 40rpx;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 28rpx;
+  box-shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.08);
+  border: 2rpx solid rgba(102, 126, 234, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6rpx;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.contact-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 40rpx;
+  text-align: center;
+  position: relative;
+  padding-bottom: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+.contact-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80rpx;
+  height: 5rpx;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3rpx;
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.3);
+}
+
+.contact-item {
+  display: block;
+  font-size: 30rpx;
+  color: #3a3a3c;
+  line-height: 2.4;
+  text-align: center;
+  padding: 10rpx 0;
+  font-weight: 400;
+  letter-spacing: 1rpx;
+}
+
+/* ==================== 底部提示 ==================== */
+.bottom-tip {
+  text-align: center;
+  font-size: 28rpx;
+  color: #8e8e93;
+  padding: 60rpx 0 40rpx;
+  margin-top: 40rpx;
+  border-top: 2rpx dashed rgba(102, 126, 234, 0.2);
+  opacity: 0.85;
+  letter-spacing: 1rpx;
+  font-weight: 400;
+}
+
+/* ==================== 动画定义 ==================== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.05) rotate(180deg);
+    opacity: 0.6;
+  }
+}
